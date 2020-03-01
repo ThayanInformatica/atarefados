@@ -1,7 +1,7 @@
 package com.example.Atarefados.config;
 
 import com.example.Atarefados.model.UsuarioLogin;
-import com.example.Atarefados.repository.UsuarioRepository;
+import com.example.Atarefados.repository.UsuarioLoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +15,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     // Criar repository spring para Usuario
-    private UsuarioRepository usuarioRepository;
+    private UsuarioLoginRepository usuarioLoginRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         // Criar classe de entidade para Usuario
-        UsuarioLogin usuario = usuarioRepository.findbyLogin(login);
+        UsuarioLogin usuario = usuarioLoginRepository.findbyLogin(login);
 
         if (usuario != null) {
             return User.withUsername(usuario.getLogin()).password(passwordEncoder.encode(usuario.getSenha())).roles("CLIENT").build();
