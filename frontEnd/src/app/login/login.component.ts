@@ -5,8 +5,8 @@ import {TokenStorage} from '../core/token.storage';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {UsuarioLogado} from '../core/usuario-logado';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {UsuarioLoginAuthService} from '../service/UsuarioLoginAuth.service';
 import {UsuarioLoginModel} from '../shared/models/UsuarioLogin.model';
+import {UsuarioLoginAuthService} from '../service/UsuarioLoginAuth.service';
 
 @Component({
   selector: 'app-login',
