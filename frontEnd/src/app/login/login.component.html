@@ -14,23 +14,32 @@
     <mat-card-title>Login</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form class="example-form">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="example-form">
       <table class="example-full-width" cellspacing="0">
         <tr>
           <td>
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Nome" [(ngModel)]="userLogin" name="userLogin" required>
+              <input matInput formControlName="login" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.login.errors }"
+                     placeholder="Nome" [(ngModel)]="usuarioLoginModel.login" name="userLogin" required>
+              <div *ngIf="submitted && f.login.errors" class="invalid-feedback">
+                <div *ngIf="f.login.errors.required">Username é requerido</div>
+              </div>
             </mat-form-field>
           </td>
         </tr>
         <tr>
           <td><mat-form-field class="example-full-width">
-            <input matInput placeholder="Senha" [(ngModel)]="senha" type="password" name="senha" required>
+            <input matInput formControlName="senha" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.senha.errors }"
+                   placeholder="Senha" [(ngModel)]="usuarioLoginModel.senha" type="password" name="senha" required>
+            <div *ngIf="submitted && f.senha.errors" class="invalid-feedback">
+              <div *ngIf="f.senha.errors.required">Senha é necessário</div>
+            </div>
           </mat-form-field></td>
         </tr></table>
+      <mat-card-actions>
+        <button mat-raised-button color="primary">Login</button>
+      </mat-card-actions>
     </form>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button (click)="login()" color="primary">Login</button>
-  </mat-card-actions>
+
 </mat-card>

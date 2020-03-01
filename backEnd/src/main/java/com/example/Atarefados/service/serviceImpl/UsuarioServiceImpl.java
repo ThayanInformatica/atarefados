@@ -1,5 +1,6 @@
 package com.example.Atarefados.service.serviceImpl;
 
+import com.example.Atarefados.exception.ApplicationException;
 import com.example.Atarefados.model.Usuario;
 import com.example.Atarefados.model.UsuarioLogin;
 import com.example.Atarefados.repository.UsuarioLoginRepository;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Objects;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -30,5 +32,18 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuarioRepository.save(usuario);
 
         return usuario;
+    }
+
+    @Override
+    public UsuarioLogin verificarUsuario(UsuarioLogin usuariologin) {
+
+        UsuarioLogin usuarioEncontrado = usuarioLoginRepository.findbyLogin(usuariologin.getLogin());
+
+        if (usuarioEncontrado == null) {
+            throw new ApplicationException("Usuario não encontrado");
+        } else if (!usuariologin.getSenha().equals(usuarioEncontrado.getSenha())) {
+            throw new ApplicationException("Senha incorreta");
+        }
+        return usuarioEncontrado;
     }
 }

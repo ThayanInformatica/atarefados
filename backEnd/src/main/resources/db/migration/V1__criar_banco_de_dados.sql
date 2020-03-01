@@ -3,7 +3,7 @@
 CREATE TABLE usuario_login
 (
     id_login INT          NOT NULL AUTO_INCREMENT,
-    login    VARCHAR(80)  NOT NULL,
+    login    VARCHAR(80) UNIQUE NOT NULL,
     senha    VARCHAR(100) NOT NULL,
     PRIMARY KEY (id_login)
 );
@@ -24,3 +24,6 @@ create table usuario
     constraint usuario_usuario_login_id_login_fk
         foreign key (id_login) references usuario_login (id_login)
 );
+
+INSERT INTO usuario(id_usuario, nome_usuario, data_nascimento, id_login)
+VALUES (1, 'Thayan Alves Pereira', '2020-02-02', 1);

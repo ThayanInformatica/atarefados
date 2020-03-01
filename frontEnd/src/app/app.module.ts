@@ -16,6 +16,7 @@ import {CustomMaterialModule} from './core/material.module';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from "@angular/material/core";
+import {MatSnackBarModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {MatNativeDateModule} from "@angular/material/core";
     AppRoutingModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSnackBarModule,
   ],
   entryComponents: [ErrorDialogComponent],
   providers: [ErrorDialogComponent, AuthService, TokenStorage, TokenStorage,

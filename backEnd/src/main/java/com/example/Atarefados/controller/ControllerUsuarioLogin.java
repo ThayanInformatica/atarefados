@@ -41,7 +41,14 @@ public class ControllerUsuarioLogin {
         Usuario usuarioSalvo = usuarioService.criarUsuario(usuario);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioSalvo);
+    }
 
+    @PostMapping("/verificar-usuario")
+    public ResponseEntity<UsuarioLogin> verificarUsuario(@Valid @RequestBody  UsuarioLogin usuario){
+
+        UsuarioLogin usuarioEncontrado = usuarioService.verificarUsuario(usuario);
+
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioEncontrado);
     }
 
 

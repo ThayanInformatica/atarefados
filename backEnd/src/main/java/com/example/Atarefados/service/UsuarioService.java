@@ -7,4 +7,6 @@ public interface UsuarioService {
 
     Usuario criarUsuario(Usuario usuario);
 
+    UsuarioLogin verificarUsuario(UsuarioLogin usuario);
+
 }

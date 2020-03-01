@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Component, Injectable} from '@angular/core';
 import 'rxjs/add/operator/do';
 import {
   HttpErrorResponse,
@@ -13,13 +13,16 @@ import {
 import {TokenStorage} from './token.storage';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
+import {ErrorDialogComponent} from './error-dialog-component';
+import {MatSnackBar} from '@angular/material';
 
 const TOKEN_HEADER_KEY = 'Authorization';
+
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
 
-  constructor(private token: TokenStorage, private router: Router) {
+  constructor(private token: TokenStorage, private router: Router, private snackBar: MatSnackBar) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler):
