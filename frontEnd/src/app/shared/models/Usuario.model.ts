@@ -1,6 +1,6 @@
 export class UsuarioLoginModel {
-    id: number;
-   login: string;
-   senha: string;
-
+  idUsuario: number;
+  nomeUsuario: string;
+  dataNascimento: string;
+  usuarioLogin: number;
 }
