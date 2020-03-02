@@ -15,9 +15,14 @@ import { HomeComponent } from './home/home.component';
 import {CustomMaterialModule} from './core/material.module';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from "@angular/material/core";
-import {MatSnackBarModule} from '@angular/material';
+import {MatNativeDateModule} from '@angular/material/core';
 import { HeaderComponent } from './shared/header/header.component';
+import {MatSnackBarModule, MatStepperModule} from '@angular/material';
+import { TodasTarefasComponent } from './tarefas/todas-tarefas/todas-tarefas.component';
+import { TarefasConcluidasComponent } from './tarefas/tarefas-concluidas/tarefas-concluidas.component';
+import { TarefasPendentesComponent } from './tarefas/tarefas-pendentes/tarefas-pendentes.component';
+import { MinhasTarefasComponent } from './tarefas/minhas-tarefas/minhas-tarefas.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -26,20 +31,26 @@ import { HeaderComponent } from './shared/header/header.component';
     LoginComponent,
     ErrorDialogComponent,
     CadastroUsuarioComponent,
-    HeaderComponent
+    HeaderComponent,
+    TodasTarefasComponent,
+    TarefasConcluidasComponent,
+    TarefasPendentesComponent,
+    MinhasTarefasComponent,
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    CustomMaterialModule,
-    FormsModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSnackBarModule,
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        CustomMaterialModule,
+        FormsModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSnackBarModule,
+        MatStepperModule,
+        FlexLayoutModule
+    ],
   entryComponents: [ErrorDialogComponent],
   providers: [ErrorDialogComponent, AuthService, TokenStorage, TokenStorage,
     {provide: HTTP_INTERCEPTORS,

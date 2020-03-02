@@ -9,8 +9,9 @@ import {UsuarioLogado} from '../core/usuario-logado';
   styleUrls: ['./home.component.css'],
   providers: [UsuarioLogado]
 })
-export class HomeComponent implements OnInit {
 
+export class HomeComponent implements OnInit {
+  isLinear = false;
   constructor(private token: TokenStorage, private router: Router, private usuarioLogado: UsuarioLogado) { }
 
   ngOnInit() {

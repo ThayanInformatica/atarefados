@@ -1,12 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
 import {AuthService} from '../service/auth-service.service';
 import {TokenStorage} from '../core/token.storage';
-import {MatDialog, MatSnackBar} from '@angular/material';
 import {UsuarioLogado} from '../core/usuario-logado';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UsuarioLoginModel} from '../shared/models/UsuarioLogin.model';
 import {UsuarioLoginAuthService} from '../service/UsuarioLoginAuth.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -66,6 +66,7 @@ export class LoginComponent implements OnInit {
     this.usuarioService.verificarUsuario(this.usuarioLoginModel).subscribe(
       data => {
       }, error => {
+        console.log(error);
         this.snackBar.open(error.error.message, 'Erro', { duration: 3000 });
       });
   }
