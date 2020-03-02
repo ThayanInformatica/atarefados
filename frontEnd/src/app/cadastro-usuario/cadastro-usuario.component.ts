@@ -1,9 +1,14 @@
-import {Component, NgModule, OnInit} from '@angular/core';
+import {Component, Input, NgModule, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MustMatch} from './must-match';
 import {MatDatepicker } from '@angular/material/datepicker';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
+import {UsuarioModel} from "../shared/models/Usuario.model";
+import {CadastroUsuarioService} from "./service/cadastro-usuario.service";
+import {UsuarioLoginModel} from "../shared/models/UsuarioLogin.model";
+import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 // @ts-ignore
 
 export const MY_FORMATS = {
@@ -29,16 +34,19 @@ export const MY_FORMATS = {
 export class CadastroUsuarioComponent implements OnInit {
   private submitted: boolean;
   registerForm: FormGroup;
+  public  usuarioLoginModel: UsuarioLoginModel = new UsuarioLoginModel();
+  public  usuarioModel: UsuarioModel = new UsuarioModel();
 
-  constructor(private formBuilder: FormBuilder, private matDatepicker: MatDatepicker<any>) {
+  constructor(private formBuilder: FormBuilder, private matDatepicker: MatDatepicker<any>,
+              private serviceCadastroUsuario: CadastroUsuarioService,    private router: Router,  private snackBar: MatSnackBar, ) {
   }
 
   ngOnInit() {
 
     this.submitted = false;
     this.registerForm = this.formBuilder.group({
-      login: ['', Validators.required],
-      nomeUsuario: ['', Validators.required],
+      login: ['', [Validators.required, Validators.minLength(5)]],
+      nomeUsuario: ['',[Validators.required, Validators.minLength(5)]],
       senha: ['', [Validators.required, Validators.minLength(6)]],
       confirmaSenha: ['', Validators.required],
       dataNascimento: ['', Validators.required],
@@ -51,6 +59,16 @@ export class CadastroUsuarioComponent implements OnInit {
     return this.registerForm.controls;
   }
 
+  salvarUsuario() {
+    this.usuarioModel.usuarioLogin = this.usuarioLoginModel;
+    this.serviceCadastroUsuario.cadastrarUsuario(this.usuarioModel).subscribe(data => {
+    this.router.navigate(['login']);
+    this.snackBar.open('Cadastrado com sucesso', 'sucess', { duration: 3000 });
+    }, error => {
+      this.snackBar.open(error.error.message, 'error', { duration: 3000 });
+    });
+  }
+
   onSubmit() {
     this.submitted = true;
 
@@ -58,7 +76,7 @@ export class CadastroUsuarioComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+    this.salvarUsuario();
   }
 
   onReset() {

@@ -23,10 +23,16 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioLoginRepository usuarioLoginRepository;
 
+
+
     @Transactional
     @Override
     public Usuario criarUsuario(Usuario usuario) {
 
+        UsuarioLogin usuarioLogin = usuarioLoginRepository.findbyLogin(usuario.getUsuarioLogin().getLogin());
+        if (usuarioLogin != null){
+            throw new ApplicationException("Usuario ja esta cadastrado");
+        }
         usuarioLoginRepository.save(usuario.getUsuarioLogin());
 
         usuarioRepository.save(usuario);

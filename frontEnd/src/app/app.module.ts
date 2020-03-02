@@ -17,6 +17,7 @@ import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.co
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatSnackBarModule} from '@angular/material';
+import { HeaderComponent } from './shared/header/header.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {MatSnackBarModule} from '@angular/material';
     HomeComponent,
     LoginComponent,
     ErrorDialogComponent,
-    CadastroUsuarioComponent
+    CadastroUsuarioComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
