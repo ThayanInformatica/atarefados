@@ -1,10 +1,8 @@
-<mat-toolbar color="primary">
-  <div class="ConteudoButton">
-    <h1>Atarefados</h1>
-    <div class="ajustando-butoes" >
-      <a *ngIf="!butao" class="button-entrar">Entrar</a>
-      <a *ngIf="!butao" class="button-cadastrar">Cadastrar</a>
-      <a *ngIf="butao" (click)="deslogar()" class="button-sair">Sair</a>
-    </div>
+<mat-toolbar color="primary" fxFlex="100">
+  <h1>Atarefados</h1>
+  <div class="ConteudoButton" fxFlex="98" fxLayoutAlign="end start">
+    <a mat-stroked-button *ngIf="!butao" [routerLink]="['/login']"  class="button-entrar">Entrar</a>
+    <a mat-stroked-button *ngIf="!butao"  [routerLink]="['/cadastrar-usuario']" class="button-cadastrar">Cadastrar</a>
+    <a mat-stroked-button *ngIf="butao" (click)="deslogar()" class="button-sair">Sair</a>
   </div>
 </mat-toolbar>

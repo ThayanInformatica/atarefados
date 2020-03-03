@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UsuarioLoginAuthService} from "../../service/UsuarioLoginAuth.service";
 import {UsuarioLogado} from "../../core/usuario-logado";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,7 @@ export class HeaderComponent implements OnInit {
 
   private butao = false;
 
-  constructor(private usuarioLogado: UsuarioLogado) { }
+  constructor(private usuarioLogado: UsuarioLogado, private router: Router) { }
 
   ngOnInit() {
     this.butao = this.usuarioLogado.verificaSeTokenExiste();
