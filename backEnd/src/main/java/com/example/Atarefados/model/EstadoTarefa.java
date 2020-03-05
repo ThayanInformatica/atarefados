@@ -30,9 +30,4 @@ public class EstadoTarefa {
 
     @Column(name = "denuncia")
     private Boolean denuncia;
-
-    @OneToOne
-    @JoinColumn(name = "id_tarefa")
-    private Tarefa tarefa;
-
 }

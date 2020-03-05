@@ -43,11 +43,13 @@ public class ControllerUsuarioLogin {
     }
 
     @PostMapping("/verificar-usuario")
-    public ResponseEntity<UsuarioLogin> verificarUsuario(@Valid @RequestBody  UsuarioLogin usuario){
+    public ResponseEntity<Usuario> verificarUsuario(@Valid @RequestBody  UsuarioLogin usuario){
 
         UsuarioLogin usuarioEncontrado = usuarioService.verificarUsuario(usuario);
 
-        return ResponseEntity.status(HttpStatus.OK).body(usuarioEncontrado);
+        Usuario usuarioLogado = usuarioRepository.findByUsuarioLoginId(usuarioEncontrado.getId());
+
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioLogado);
     }
 
 

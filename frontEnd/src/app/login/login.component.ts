@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
               private usuarioService: UsuarioLoginAuthService,
               private usuarioLoginModel: UsuarioLoginModel) {
   }
+
   ngOnInit() {
     this.usuarioLogado.verificarUsuarioLogado();
 
@@ -65,10 +66,12 @@ export class LoginComponent implements OnInit {
   verificarUsuario() {
     this.usuarioService.verificarUsuario(this.usuarioLoginModel).subscribe(
       data => {
+        this.token.salvarUsuario(data);
       }, error => {
         console.log(error);
-        this.snackBar.open(error.error.message, 'Erro', { duration: 3000 });
+        this.snackBar.open(error.error.message, 'Erro', {duration: 3000});
       });
   }
+
 
 }

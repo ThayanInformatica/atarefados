@@ -17,7 +17,7 @@ import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.co
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { HeaderComponent } from './shared/header/header.component';
-import {MatSnackBarModule, MatStepperModule} from '@angular/material';
+import {MatIconModule, MatSnackBarModule, MatStepperModule, MatTooltipModule} from '@angular/material';
 import { TodasTarefasComponent } from './tarefas/todas-tarefas/todas-tarefas.component';
 import { TarefasConcluidasComponent } from './tarefas/tarefas-concluidas/tarefas-concluidas.component';
 import { TarefasPendentesComponent } from './tarefas/tarefas-pendentes/tarefas-pendentes.component';
@@ -49,7 +49,9 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         MatNativeDateModule,
         MatSnackBarModule,
         MatStepperModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        MatIconModule,
+        MatTooltipModule
     ],
   entryComponents: [ErrorDialogComponent],
   providers: [ErrorDialogComponent, AuthService, TokenStorage, TokenStorage,
