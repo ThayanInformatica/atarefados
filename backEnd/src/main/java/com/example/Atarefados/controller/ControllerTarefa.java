@@ -5,14 +5,13 @@ import com.example.Atarefados.model.EstadoTarefa;
 import com.example.Atarefados.model.Tarefa;
 import com.example.Atarefados.repository.EstadoTarefaRepository;
 import com.example.Atarefados.repository.TarefaRepository;
+import com.example.Atarefados.service.TarefaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,10 +19,10 @@ import java.util.List;
 public class ControllerTarefa {
 
     @Autowired
-    TarefaRepository tarefaRepository;
+    private TarefaRepository tarefaRepository;
 
     @Autowired
-    EstadoTarefaRepository estadoTarefaRepository;
+    private TarefaService tarefaService;
 
     @GetMapping("/todas-tarefas")
     public ResponseEntity<List<Tarefa>> recuperarTodasTarefas(){
@@ -47,6 +46,14 @@ public class ControllerTarefa {
         List<Tarefa> tarefas = tarefaRepository.recuperarTodasTarefasDoDia();
 
         return ResponseEntity.status(HttpStatus.OK).body(tarefas);
+    }
+
+    @PutMapping("/concluir-tarefa/")
+    public ResponseEntity<EstadoTarefa> concluirTarefa(@Valid @RequestBody EstadoTarefa estadoTarefa){
+
+        tarefaService.concluirTarefa(estadoTarefa);
+
+        return ResponseEntity.status(HttpStatus.OK).body(estadoTarefa);
     }
 
 }

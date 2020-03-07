@@ -4,6 +4,7 @@ import {TarefaModel} from '../shared/models/Tarefa.model';
 import {Observable, throwError} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {EstadoTarefaModel} from '../shared/models/EstadoTarefa.model';
+import {DenunciaModel} from "../shared/models/Denuncia.model";
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,18 @@ export class TodasTarefasService {
     return this.http.get<EstadoTarefaModel>(this.baseUrl + '/tarefas/estado-tarefa/' + idTarefa)
       .map(res => res)
       .catch((error: object) => throwError(error));
+  }
+
+  concluirTarefa(estadoTarefaModel: EstadoTarefaModel): Observable<EstadoTarefaModel> {
+    return this.http.put<EstadoTarefaModel>(this.baseUrl + '/tarefas/concluir-tarefa/', estadoTarefaModel)
+      .map(res => res)
+      .catch((error: object) => throwError(error));
+  }
+
+  denunciaTarefa(denunciaModel: DenunciaModel): Observable<DenunciaModel> {
+    return this.http.post<DenunciaModel>(this.baseUrl + '/tarefas/sss', denunciaModel)
+        .map(res => res)
+        .catch((error: object) => throwError(error));
   }
 
 }

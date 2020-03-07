@@ -23,6 +23,8 @@ import { TarefasConcluidasComponent } from './tarefas/tarefas-concluidas/tarefas
 import { TarefasPendentesComponent } from './tarefas/tarefas-pendentes/tarefas-pendentes.component';
 import { MinhasTarefasComponent } from './tarefas/minhas-tarefas/minhas-tarefas.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {MinhasTarefasDialogComponent} from "./tarefas/minhas-tarefas/dialog/minhas-tarefas-dialog-component";
+import {DenunciaTarefaDialogComponent} from "./tarefas/todas-tarefas/dialog/denuncia-tarefa-dialog-component";
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     TarefasConcluidasComponent,
     TarefasPendentesComponent,
     MinhasTarefasComponent,
+    MinhasTarefasDialogComponent,
+    DenunciaTarefaDialogComponent
   ],
     imports: [
         BrowserModule,
@@ -53,8 +57,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         MatIconModule,
         MatTooltipModule
     ],
-  entryComponents: [ErrorDialogComponent],
-  providers: [ErrorDialogComponent, AuthService, TokenStorage, TokenStorage,
+  entryComponents: [ErrorDialogComponent, MinhasTarefasDialogComponent, DenunciaTarefaDialogComponent],
+  providers: [ErrorDialogComponent, MinhasTarefasDialogComponent, DenunciaTarefaDialogComponent, AuthService, TokenStorage, TokenStorage,
     {provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi : true}

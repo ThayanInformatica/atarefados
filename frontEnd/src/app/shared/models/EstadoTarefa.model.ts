@@ -6,5 +6,6 @@ export class EstadoTarefaModel {
   pendente: boolean;
   naoFeita: boolean;
   denuncia: boolean;
+  dataConclusao: string;
   tarefa: TarefaModel;
 }

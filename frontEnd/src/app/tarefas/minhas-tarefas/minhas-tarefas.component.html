@@ -1,3 +1,4 @@
+<body>
 <h2>Minhas Tarefas</h2>
 <table mat-table [dataSource]="todasMinhasTarefas" class="mat-elevation-z8">
 
@@ -27,18 +28,29 @@
     <td mat-cell *matCellDef="let tarefas"> {{tarefas.descricao}} </td>
   </ng-container>
 
+    <ng-container matColumnDef="conclusao">
+      <th mat-header-cell *matHeaderCellDef> Conclusão</th>
+      <td mat-cell *matCellDef="let tarefas"> {{tarefas.estadoTarefa.dataConclusao != null ? tarefas.estadoTarefa.dataConclusao : 'Conclua esta tarefa'}} </td>
+    </ng-container>
+
   <ng-container matColumnDef="acao">
-    <th mat-header-cell *matHeaderCellDef> Ação:</th>
+    <th mat-header-cell *matHeaderCellDef> Ação</th>
     <td mat-cell *matCellDef="let tarefas">
-      <button mat-button matTooltip="Concluir tarefa">
-        <mat-icon class="icon-concluir">{{tarefas.estadoTarefa.concluida ? 'check_circle' : 'check_circle_outline'}}</mat-icon>
+      <button mat-button
+              [disabled]="tarefas.estadoTarefa.concluida == true" (click)="concluirTarefa(tarefas.estadoTarefa)">
+        <mat-icon matTooltip="Tarefa Concluída" *ngIf="tarefas.estadoTarefa.concluida" class="icon-concluir">
+          check_circle
+        </mat-icon>
+        <mat-icon matTooltip="Concluir Tarefa" *ngIf="!tarefas.estadoTarefa.concluida" class="icon-concluir">
+          check_circle_outline
+        </mat-icon>
       </button>
     </td>
   </ng-container>
-
 
   <!-- Symbol Column -->
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+</body>

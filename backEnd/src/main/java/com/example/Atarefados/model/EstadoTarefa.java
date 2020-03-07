@@ -1,13 +1,10 @@
 package com.example.Atarefados.model;
 
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -30,4 +27,7 @@ public class EstadoTarefa {
 
     @Column(name = "denuncia")
     private Boolean denuncia;
+
+    @Column(name = "data_conclusao")
+    private LocalDateTime dataConclusao;
 }
