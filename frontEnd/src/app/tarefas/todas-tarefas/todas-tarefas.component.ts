@@ -1,11 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, Input, OnInit} from '@angular/core';
 import {TarefaModel} from '../../shared/models/Tarefa.model';
 import {TodasTarefasService} from '../todas-tarefas.service';
 import {Conversoes} from '../../shared/utils/conversoes';
-import {MatDialog} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog} from "@angular/material";
 import {DenunciaTarefaDialogComponent} from "./dialog/denuncia-tarefa-dialog-component";
 import {DenunciaModel} from "../../shared/models/Denuncia.model";
 import {TokenStorage} from "../../core/token.storage";
+import {MatDialogRef} from "@angular/material/dialog";
+import {NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-todas-tarefas',
@@ -15,28 +17,22 @@ import {TokenStorage} from "../../core/token.storage";
 
 export class TodasTarefasComponent implements OnInit {
 
-  public todasTarefas: TarefaModel[];
-
-  public denunciaModel: DenunciaModel;
+  @Input() todasTarefas: TarefaModel[] = [];
+           denunciaModel: DenunciaModel;
 
   displayedColumns: string[] = ['nomeTarefa', 'dataTarefa', 'descricao', 'usuario', 'status'];
 
-  constructor(private token: TokenStorage, public dialog: MatDialog, private todasTarefasService: TodasTarefasService, private conversoes: Conversoes) {
+  constructor(public changeDetectorRefs: ChangeDetectorRef,
+              private token: TokenStorage,
+              public dialog: MatDialog,
+              private todasTarefasService: TodasTarefasService,
+              private conversoes: Conversoes,
+              private router: Router) {
   }
+
 
   ngOnInit() {
-    this.carregarTodasAsTarefas();
-  }
-
-  carregarTodasAsTarefas() {
-    this.todasTarefasService.recuperarTodasTarefasDoDia().subscribe(data => {
-      this.todasTarefas = data;
-
-      this.conversoes.FormataStringDataArrayDeTarefas(this.todasTarefas);
-
-      console.log(this.todasTarefas);
-
-    });
+    this.changeDetectorRefs.detectChanges();
   }
 
   openDialog(tarefaModel: TarefaModel): void {

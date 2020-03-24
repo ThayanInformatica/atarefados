@@ -1,5 +1,6 @@
 -- Sempre que criar tabela neste arquivo SQL, dropar o database(ou a tabela "flyway_schema_history") e statar novamente a aplicação
 -- Fazer isto para não da conflito com o flyway com a tabela que o flyway cria em schemas dentro do banco
+
 CREATE TABLE usuario_login
 (
     id_login INT                NOT NULL AUTO_INCREMENT,
@@ -66,13 +67,13 @@ INSERT INTO estado_tarefa(id_estado_tarefa, pendente, concluida, denuncia, nao_f
 VALUES (3, true, false, false, false, null );
 
 INSERT INTO tarefas(id_tarefa, nome_tarefa, desricao, data, id_usuario, id_estado_tarefa)
-VALUES (1, 'Larva Louça', 'Lavar as louças da pia e as panelas', '2020-03-07', 1, 1);
+VALUES (1, 'Larva Louça', 'Lavar as louças da pia e as panelas', '2020-03-13', 1, 1);
 
 INSERT INTO tarefas(id_tarefa, nome_tarefa, desricao, data, id_usuario, id_estado_tarefa)
-VALUES (2, 'Limpar a casa', 'Limpar a casa para passar o pano', '2020-03-07', 1, 2);
+VALUES (2, 'Limpar a casa', 'Limpar a casa para passar o pano', '2020-03-13', 1, 2);
 
 INSERT INTO tarefas(id_tarefa, nome_tarefa, desricao, data, id_usuario, id_estado_tarefa)
-VALUES (3, 'lavar o banheiro', 'Lavar o banheiro e esfregar as paredes', '2020-03-07', 1, 3);
+VALUES (3, 'lavar o banheiro', 'Lavar o banheiro e esfregar as paredes', '2020-03-13', 1, 3);
 
 CREATE TABLE denuncia_tarefa
 (
