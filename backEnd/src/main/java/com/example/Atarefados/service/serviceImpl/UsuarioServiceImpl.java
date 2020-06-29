@@ -23,8 +23,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioLoginRepository usuarioLoginRepository;
 
-
-
     @Transactional
     @Override
     public Usuario criarUsuario(Usuario usuario) {

@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Data
 @Entity
@@ -29,5 +30,10 @@ public class DenunciaTarefa {
     @OneToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
+
+    @PrePersist
+    private void inicilizaData() {
+        this.dataDenuncia = LocalDateTime.now();
+    }
 
 }

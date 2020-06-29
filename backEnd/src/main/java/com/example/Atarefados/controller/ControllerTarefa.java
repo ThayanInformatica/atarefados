@@ -1,6 +1,7 @@
 package com.example.Atarefados.controller;
 
 
+import com.example.Atarefados.model.DenunciaTarefa;
 import com.example.Atarefados.model.EstadoTarefa;
 import com.example.Atarefados.model.Tarefa;
 import com.example.Atarefados.repository.EstadoTarefaRepository;
@@ -54,6 +55,13 @@ public class ControllerTarefa {
         tarefaService.concluirTarefa(estadoTarefa);
 
         return ResponseEntity.status(HttpStatus.OK).body(estadoTarefa);
+    }
+
+    @PostMapping("/denunciar-tarefa")
+    private ResponseEntity<?> denunciarTarefa(@RequestBody DenunciaTarefa denunciaTarefa) {
+        tarefaService.denunciarTarefa(denunciaTarefa);
+
+        return ResponseEntity.status(HttpStatus.OK).body(denunciaTarefa);
     }
 
 }
