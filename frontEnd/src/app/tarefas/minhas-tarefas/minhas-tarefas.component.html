@@ -19,7 +19,7 @@
 
   <ng-container matColumnDef="dataTarefa">
     <th mat-header-cell *matHeaderCellDef> Data Tarefa</th>
-    <td mat-cell *matCellDef="let tarefas"> {{tarefas.dataTarefa}} </td>
+    <td mat-cell *matCellDef="let tarefas"> {{tarefas.dataTarefa | date: 'dd/MM/yyyy - HH:mm' }} </td>
   </ng-container>
 
   <!-- Weight Column -->
@@ -31,7 +31,13 @@
   <ng-container matColumnDef="conclusao">
     <th mat-header-cell *matHeaderCellDef> Conclusão</th>
     <td mat-cell
-        *matCellDef="let tarefas"> {{tarefas.estadoTarefa.dataConclusao != null ? tarefas.estadoTarefa.dataConclusao : 'Conclua esta tarefa'}} </td>
+        *matCellDef="let tarefas">
+      <span *ngIf="tarefas.estadoTarefa.dataConclusao">
+        {{ tarefas.estadoTarefa.dataConclusao | date: 'dd/MM/yyyy - HH:mm'}}
+      </span>
+      <span *ngIf="tarefas.estadoTarefa.dataConclusao == null">
+        Conclua esta tarefa
+      </span>
   </ng-container>
 
   <ng-container matColumnDef="acao">

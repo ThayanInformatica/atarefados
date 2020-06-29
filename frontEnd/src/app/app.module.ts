@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './service/auth-service.service';
 import {TokenStorage} from './core/token.storage';
 import {Interceptor} from './core/app.interceptor';
@@ -27,15 +27,17 @@ import {SharedModule} from "./shared/shared.module";
     CadastroUsuarioComponent,
     LoaderComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    CustomMaterialModule,
-    FormsModule,
-    HomeModule,
-    SharedModule,
-    AppRoutingModule],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        CustomMaterialModule,
+        FormsModule,
+        HomeModule,
+        SharedModule,
+        AppRoutingModule,
+        ReactiveFormsModule
+    ],
   entryComponents: [ErrorDialogComponent],
   providers: [LoaderService, ErrorDialogComponent, AuthService, TokenStorage, TokenStorage,
     {

@@ -9,6 +9,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {MinhasTarefasDialogComponent} from "./dialog/minhas-tarefas-dialog-component";
 import {TodasTarefasComponent} from "../todas-tarefas/todas-tarefas.component";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-minhas-tarefas',
@@ -24,7 +25,14 @@ export class MinhasTarefasComponent implements OnInit {
   private usuarioModel: UsuarioModel = this.token.getUsuarioLogado();
   displayedColumns: string[] = ['nomeTarefa', 'dataTarefa', 'descricao', 'acao', 'conclusao'];
 
-  constructor(private ref: ChangeDetectorRef, private router: Router, private tarefasComponent: TodasTarefasComponent, private todasTarefasService: TodasTarefasService, private conversoes: Conversoes, private token: TokenStorage, public dialog: MatDialog) {
+  constructor(private ref: ChangeDetectorRef,
+              private router: Router,
+              private tarefasComponent: TodasTarefasComponent,
+              private todasTarefasService: TodasTarefasService,
+              private conversoes: Conversoes,
+              private token: TokenStorage,
+              public dialog: MatDialog,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -34,7 +42,6 @@ export class MinhasTarefasComponent implements OnInit {
   carregarTodasMinhasAsTarefas() {
     this.todasTarefasService.recuperarTodasMinhasTarefasDoDia(this.usuarioModel.idUsuario).subscribe(data => {
       this.todasMinhasTarefas = data;
-      this.conversoes.FormataStringDataArrayDeTarefas(this.todasMinhasTarefas);
 
       this.carregarTodasAsTarefas();
     });
@@ -44,7 +51,6 @@ export class MinhasTarefasComponent implements OnInit {
     this.todasTarefasService.recuperarTodasTarefasDoDia().subscribe(data => {
       this.todasTarefas = data;
 
-      this.conversoes.FormataStringDataArrayDeTarefas(this.todasTarefas);
     });
   }
 
@@ -61,6 +67,8 @@ export class MinhasTarefasComponent implements OnInit {
 
       this.todasTarefasService.concluirTarefa(estadoTarefaModel).subscribe(result => {
         this.carregarTodasMinhasAsTarefas();
+      }, error => {
+        this.snackBar.open(error.error.message, 'error', { duration: 3000 });
       });
     });
   }

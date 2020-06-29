@@ -1,24 +1,22 @@
 <app-header></app-header>
 
-<mat-horizontal-stepper [linear]="isLinear" #stepper>
-  <mat-step>
+<mat-tab-group>
+  <mat-tab label="Minhas tarefas">
     <app-minhas-tarefas></app-minhas-tarefas>
-  </mat-step>
+  </mat-tab>
 
-  <mat-step>
+  <mat-tab label="Tarefas Concluídas">
     <app-tarefas-concluidas></app-tarefas-concluidas>
-  </mat-step>
+  </mat-tab>
 
-  <mat-step>
+  <mat-tab label="Tarefas Pendentes">
     <app-tarefas-pendentes></app-tarefas-pendentes>
-  </mat-step>
+  </mat-tab>
 
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
+  <mat-tab>
     <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button>Back</button>
+      <button mat-button>Reset</button>
     </div>
-  </mat-step>
-</mat-horizontal-stepper>
+  </mat-tab>
+</mat-tab-group>

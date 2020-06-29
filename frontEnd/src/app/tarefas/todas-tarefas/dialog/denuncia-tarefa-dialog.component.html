@@ -1,14 +1,14 @@
 <h2 mat-dialog-title>Denúncia</h2>
 <mat-dialog-content class="error">Reportar Tarefa
   <p>
-    <mat-form-field fxLayout.gt-md="100">
+    <mat-form-field fxFlex="100">
       <mat-label>escreva a denúncia</mat-label>
-      <textarea matInput name="descricao" [(ngModel)]="denunciaModel.descricao"></textarea>
+      <textarea matInput name="descricao" [(ngModel)]="denunciaModel"></textarea>
     </mat-form-field>
   </p>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-raised-button (click)="denunciaTarefa()">Ok</button>
+  <button mat-raised-button (click)="denunciaTarefa()">Denunciar</button>
   <button mat-raised-button (click)="closeDialog()">Cancelar</button>
 </mat-dialog-actions>

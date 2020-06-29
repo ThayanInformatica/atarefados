@@ -4,7 +4,7 @@ import {TarefaModel} from "./Tarefa.model";
 export class DenunciaModel {
   idDenuncia: number;
   descricao: string;
-  dataDenuncia: string;
+  dataDenuncia: Date;
   tarefa: TarefaModel;
   usuario: UsuarioModel;
 }

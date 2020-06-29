@@ -8,6 +8,7 @@ import {DenunciaModel} from "../../shared/models/Denuncia.model";
 import {TokenStorage} from "../../core/token.storage";
 import {MatDialogRef} from "@angular/material/dialog";
 import {NavigationEnd, Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-todas-tarefas',
@@ -18,7 +19,7 @@ import {NavigationEnd, Router} from "@angular/router";
 export class TodasTarefasComponent implements OnInit {
 
   @Input() todasTarefas: TarefaModel[] = [];
-           denunciaModel: DenunciaModel;
+           denunciaModel: DenunciaModel = new DenunciaModel();
 
   displayedColumns: string[] = ['nomeTarefa', 'dataTarefa', 'descricao', 'usuario', 'status'];
 
@@ -27,7 +28,8 @@ export class TodasTarefasComponent implements OnInit {
               public dialog: MatDialog,
               private todasTarefasService: TodasTarefasService,
               private conversoes: Conversoes,
-              private router: Router) {
+              private router: Router,
+              private snackBar: MatSnackBar) {
   }
 
 
@@ -40,11 +42,15 @@ export class TodasTarefasComponent implements OnInit {
       width: '500px'
     });
     dialogRef.componentInstance.onAdd.subscribe(result => {
-      this.denunciaModel = result;
+      this.denunciaModel.descricao = result;
       this.denunciaModel.tarefa = tarefaModel;
       this.denunciaModel.usuario = this.token.getUsuarioLogado();
 
-      this.todasTarefasService.denunciaTarefa(this.denunciaModel).subscribe(result => {
+
+      this.todasTarefasService.denunciaTarefa(this.denunciaModel).subscribe(() => {
+        this.snackBar.open('Denuncia registrada com sucesso!', 'sucess', { duration: 3000 });
+      },error => {
+        this.snackBar.open(error.error.message, 'error', { duration: 3000 });
       });
     });
     dialogRef.afterClosed().subscribe(() => {

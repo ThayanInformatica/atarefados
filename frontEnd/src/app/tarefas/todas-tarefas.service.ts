@@ -41,7 +41,7 @@ export class TodasTarefasService {
   }
 
   denunciaTarefa(denunciaModel: DenunciaModel): Observable<DenunciaModel> {
-    return this.http.post<DenunciaModel>(this.baseUrl + '/tarefas/sss', denunciaModel)
+    return this.http.post<DenunciaModel>(this.baseUrl + '/tarefas/denunciar-tarefa/', denunciaModel)
         .map(res => res)
         .catch((error: object) => throwError(error));
   }
