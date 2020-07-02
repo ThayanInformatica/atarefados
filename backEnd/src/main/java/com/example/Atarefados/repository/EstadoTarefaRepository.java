@@ -10,4 +10,6 @@ import java.util.List;
 
 @Repository
 public interface EstadoTarefaRepository extends JpaRepository<EstadoTarefa, Long> {
+
+    EstadoTarefa findByTarefa(Tarefa tarefa);
 }

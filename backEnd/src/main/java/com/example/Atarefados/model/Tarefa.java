@@ -29,8 +29,4 @@ public class Tarefa {
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
-    @OneToOne
-    @JoinColumn(name = "id_estado_tarefa")
-    private EstadoTarefa estadoTarefa;
-
 }

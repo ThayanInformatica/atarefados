@@ -5,6 +5,7 @@ import com.example.Atarefados.model.DenunciaTarefa;
 import com.example.Atarefados.model.EstadoTarefa;
 import com.example.Atarefados.model.Tarefa;
 import com.example.Atarefados.model.Usuario;
+import com.example.Atarefados.model.dto.TarefaEstadoDTO;
 import com.example.Atarefados.repository.DenunciaTarefaRepository;
 import com.example.Atarefados.repository.EstadoTarefaRepository;
 import com.example.Atarefados.repository.TarefaRepository;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TarefaServiceImpl implements TarefaService {
@@ -35,10 +38,12 @@ public class TarefaServiceImpl implements TarefaService {
 
     @Transactional
     @Override
-    public void concluirTarefa(EstadoTarefa estadoTarefa) {
+    public EstadoTarefa concluirTarefa(Tarefa tarefa) {
+        EstadoTarefa estadoTarefa = new EstadoTarefa();
         estadoTarefa.setConcluida(true);
         estadoTarefa.setDataConclusao(LocalDateTime.now());
-        estadoTarefaRepository.save(estadoTarefa);
+        estadoTarefa.setTarefa(tarefa);
+        return estadoTarefaRepository.save(estadoTarefa);
     }
 
     @Override
@@ -51,5 +56,21 @@ public class TarefaServiceImpl implements TarefaService {
         }
 
         denunciaTarefaRepository.save(denunciaTarefa);
+    }
+
+    @Override
+    public List<TarefaEstadoDTO> recuperarTarefasDoUsuarioPorDataDiaria(Long idUsuario) {
+        List<Tarefa> tarefas = tarefaRepository.recuperarTarefasDoUsuarioPorDataDiaria(idUsuario);
+        List<TarefaEstadoDTO> tarefaEstadoDTOS = new ArrayList<>();
+        tarefas.forEach(tarefa -> {
+            TarefaEstadoDTO tarefaEstadoDTO = new TarefaEstadoDTO();
+            tarefaEstadoDTO.setTarefa(tarefa);
+
+            EstadoTarefa estadoTarefa = estadoTarefaRepository.findByTarefa(tarefa);
+            tarefaEstadoDTO.setEstadoTarefa(estadoTarefa);
+            tarefaEstadoDTOS.add(tarefaEstadoDTO);
+        });
+
+        return tarefaEstadoDTOS;
     }
 }

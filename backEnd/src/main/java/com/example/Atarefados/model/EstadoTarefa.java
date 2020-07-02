@@ -20,14 +20,19 @@ public class EstadoTarefa {
     private Boolean concluida;
 
     @Column(name = "pendente")
-    private Boolean pendente;
+    private Boolean pendente = false;
 
     @Column(name = "nao_feita")
-    private Boolean naoFeita;
+    private Boolean naoFeita = false;
 
     @Column(name = "denuncia")
-    private Boolean denuncia;
+    private Boolean denuncia = false;
 
     @Column(name = "data_conclusao")
     private LocalDateTime dataConclusao;
+
+    @OneToOne
+    @JoinColumn(name = "id_tarefa")
+    private Tarefa tarefa;
+
 }

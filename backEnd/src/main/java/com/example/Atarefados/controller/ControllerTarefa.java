@@ -4,6 +4,7 @@ package com.example.Atarefados.controller;
 import com.example.Atarefados.model.DenunciaTarefa;
 import com.example.Atarefados.model.EstadoTarefa;
 import com.example.Atarefados.model.Tarefa;
+import com.example.Atarefados.model.dto.TarefaEstadoDTO;
 import com.example.Atarefados.repository.EstadoTarefaRepository;
 import com.example.Atarefados.repository.TarefaRepository;
 import com.example.Atarefados.service.TarefaService;
@@ -34,9 +35,9 @@ public class ControllerTarefa {
     }
 
     @GetMapping("/minhas-tarafas/{idUsuario}")
-    public ResponseEntity<List<Tarefa>> recuperarTodasTarefas(@PathVariable Long idUsuario){
+    public ResponseEntity<?> recuperarTodasTarefas(@PathVariable Long idUsuario){
 
-        List<Tarefa> minhasTarefas = tarefaRepository.recuperarTarefasDoUsuarioPorDataDiaria(idUsuario);
+        List<TarefaEstadoDTO> minhasTarefas = tarefaService.recuperarTarefasDoUsuarioPorDataDiaria(idUsuario);
 
         return ResponseEntity.status(HttpStatus.OK).body(minhasTarefas);
     }
@@ -50,9 +51,9 @@ public class ControllerTarefa {
     }
 
     @PutMapping("/concluir-tarefa/")
-    public ResponseEntity<EstadoTarefa> concluirTarefa(@Valid @RequestBody EstadoTarefa estadoTarefa){
+    public ResponseEntity<?> concluirTarefa(@Valid @RequestBody Tarefa tarefa){
 
-        tarefaService.concluirTarefa(estadoTarefa);
+        EstadoTarefa estadoTarefa = tarefaService.concluirTarefa(tarefa);
 
         return ResponseEntity.status(HttpStatus.OK).body(estadoTarefa);
     }
