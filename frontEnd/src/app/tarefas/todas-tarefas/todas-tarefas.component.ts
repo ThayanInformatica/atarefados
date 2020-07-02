@@ -53,8 +53,6 @@ export class TodasTarefasComponent implements OnInit {
         this.snackBar.open(error.error.message, 'error', { duration: 3000 });
       });
     });
-    dialogRef.afterClosed().subscribe(() => {
-    })
   }
 
 }

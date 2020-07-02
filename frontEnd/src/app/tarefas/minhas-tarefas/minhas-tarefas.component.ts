@@ -10,6 +10,7 @@ import {MinhasTarefasDialogComponent} from "./dialog/minhas-tarefas-dialog-compo
 import {TodasTarefasComponent} from "../todas-tarefas/todas-tarefas.component";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {TarefaEstadoDto} from "../../shared/models/dto/TarefaEstado.dto";
 
 @Component({
   selector: 'app-minhas-tarefas',
@@ -20,7 +21,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 
 export class MinhasTarefasComponent implements OnInit {
 
-  public todasMinhasTarefas: TarefaModel[];
+  public todasMinhasTarefas: TarefaEstadoDto[] = [];
   todasTarefas: TarefaModel[];
   private usuarioModel: UsuarioModel = this.token.getUsuarioLogado();
   displayedColumns: string[] = ['nomeTarefa', 'dataTarefa', 'descricao', 'acao', 'conclusao'];
@@ -43,6 +44,7 @@ export class MinhasTarefasComponent implements OnInit {
     this.todasTarefasService.recuperarTodasMinhasTarefasDoDia(this.usuarioModel.idUsuario).subscribe(data => {
       this.todasMinhasTarefas = data;
 
+      debugger
       this.carregarTodasAsTarefas();
     });
   }
@@ -54,18 +56,18 @@ export class MinhasTarefasComponent implements OnInit {
     });
   }
 
-  concluirTarefa(estadoTarefaModel: EstadoTarefaModel) {
-    this.openDialog(estadoTarefaModel);
+  concluirTarefa(tarefaModel: TarefaModel) {
+    this.openDialog(tarefaModel);
   }
 
-  openDialog(estadoTarefaModel: EstadoTarefaModel): void {
+  openDialog(tarefaModel: TarefaModel): void {
     const dialogRef = this.dialog.open(MinhasTarefasDialogComponent, {
       width: '250px'
     }
     );
     dialogRef.componentInstance.onAdd.subscribe(() => {
 
-      this.todasTarefasService.concluirTarefa(estadoTarefaModel).subscribe(result => {
+      this.todasTarefasService.concluirTarefa(tarefaModel).subscribe(result => {
         this.carregarTodasMinhasAsTarefas();
       }, error => {
         this.snackBar.open(error.error.message, 'error', { duration: 3000 });

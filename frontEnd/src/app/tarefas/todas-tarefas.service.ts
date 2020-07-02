@@ -5,6 +5,7 @@ import {Observable, throwError} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {EstadoTarefaModel} from '../shared/models/EstadoTarefa.model';
 import {DenunciaModel} from "../shared/models/Denuncia.model";
+import {TarefaEstadoDto} from "../shared/models/dto/TarefaEstado.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ export class TodasTarefasService {
       .catch((error: object) => throwError(error));
   }
 
-  recuperarTodasMinhasTarefasDoDia(idUsuario: number): Observable<TarefaModel[]> {
-    return this.http.get<TarefaModel[]>(this.baseUrl + '/tarefas/minhas-tarafas/' + idUsuario)
+  recuperarTodasMinhasTarefasDoDia(idUsuario: number): Observable<TarefaEstadoDto[]> {
+    return this.http.get<TarefaEstadoDto[]>(this.baseUrl + '/tarefas/minhas-tarafas/' + idUsuario)
       .map(res => res)
       .catch((error: object) => throwError(error));
   }
@@ -34,13 +35,14 @@ export class TodasTarefasService {
       .catch((error: object) => throwError(error));
   }
 
-  concluirTarefa(estadoTarefaModel: EstadoTarefaModel): Observable<EstadoTarefaModel> {
-    return this.http.put<EstadoTarefaModel>(this.baseUrl + '/tarefas/concluir-tarefa/', estadoTarefaModel)
+  concluirTarefa(tarefaModel: TarefaModel): Observable<EstadoTarefaModel> {
+    return this.http.put<EstadoTarefaModel>(this.baseUrl + '/tarefas/concluir-tarefa/', tarefaModel)
       .map(res => res)
       .catch((error: object) => throwError(error));
   }
 
   denunciaTarefa(denunciaModel: DenunciaModel): Observable<DenunciaModel> {
+    debugger
     return this.http.post<DenunciaModel>(this.baseUrl + '/tarefas/denunciar-tarefa/', denunciaModel)
         .map(res => res)
         .catch((error: object) => throwError(error));
