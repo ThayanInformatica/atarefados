@@ -5,9 +5,10 @@ import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {SharedModule} from "../shared/shared.module";
 import {DashboardComponent} from "./dashboard.component";
+import {HomeModule} from "../home/home.module";
 
 const routes: Routes = [
-  {path: 'dashboard', component: DashboardComponent},
+  {path: '', component: DashboardComponent},
 ];
 
 @NgModule({
@@ -19,11 +20,11 @@ const routes: Routes = [
     CustomMaterialModule,
     FormsModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    HomeModule
   ],
   entryComponents: [],
-  exports: [
-  ],
+  exports: [],
   providers: []
 })
 export class DashboardModule {

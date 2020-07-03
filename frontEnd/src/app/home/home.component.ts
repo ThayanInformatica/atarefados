@@ -12,9 +12,6 @@ import {MatTabChangeEvent} from "@angular/material/tabs";
 })
 
 export class HomeComponent implements OnInit {
-  step: number = TarefaSteps.MINHAS_TAREFA;
-  TarefaSteps = TarefaSteps;
-
 
   constructor(private token: TokenStorage,
               private router: Router,
@@ -24,14 +21,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.usuarioLogado.verificarUsuarioLogado();
   }
-
-  onTabChange(clickedTab: MatTabChangeEvent): void {
-    this.step = clickedTab.index;
-  }
 }
 
-export const TarefaSteps = {
-  MINHAS_TAREFA: 0,
-  CONCLUIDAS: 1,
-  PENDENTES: 2
-};
+

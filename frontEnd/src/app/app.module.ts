@@ -18,6 +18,7 @@ import {LoaderService} from "./loader/loader.service";
 import {LoaderInterceptor} from "./loader/loader.interceptor";
 import {HomeModule} from "./home/home.module";
 import {SharedModule} from "./shared/shared.module";
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import {SharedModule} from "./shared/shared.module";
     LoginComponent,
     ErrorDialogComponent,
     CadastroUsuarioComponent,
-    LoaderComponent
+    LoaderComponent,
   ],
     imports: [
         BrowserModule,

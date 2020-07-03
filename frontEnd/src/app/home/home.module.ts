@@ -11,6 +11,7 @@ import {CustomMaterialModule} from "../core/material.module";
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {SharedModule} from "../shared/shared.module";
+import { TarefasHomeComponent } from './tarefas-home/tarefas-home.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
     TodasTarefasComponent,
     MinhasTarefasDialogComponent,
     DenunciaTarefaDialogComponent,
+    TarefasHomeComponent,
   ],
   imports: [
     CommonModule,
@@ -45,6 +47,8 @@ const routes: Routes = [
     TarefasConcluidasComponent,
     MinhasTarefasComponent,
     TarefasPendentesComponent,
+    HomeComponent,
+    TarefasHomeComponent,
   ],
   providers: [MinhasTarefasDialogComponent, DenunciaTarefaDialogComponent]
 })

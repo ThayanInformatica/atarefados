@@ -49,9 +49,11 @@ export class LoginComponent implements OnInit {
     this.authService.attemptAuth(this.usuarioLoginModel).subscribe(
       data => {
         this.token.saveToken(data);
-        this.router.navigate(['home']);
-      }, () => {
-        alert("erro");
+        if (this.usuarioLoginModel.login === 'administrador') {
+          this.router.navigate(['dashboard']);
+        } else {
+          this.router.navigate(['home']);
+        }
       }
     );
   }
@@ -70,7 +72,6 @@ export class LoginComponent implements OnInit {
         this.login();
         this.token.salvarUsuario(data);
       }, error => {
-        console.log(error);
         this.snackBar.open(error.error.message, 'Erro', {duration: 3000});
       });
   }

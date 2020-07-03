@@ -1,15 +1,2 @@
 <app-header></app-header>
-
-<mat-tab-group (selectedTabChange)="onTabChange($event)">
-  <mat-tab label="Minhas tarefas">
-    <app-minhas-tarefas *ngIf="step === TarefaSteps.MINHAS_TAREFA"></app-minhas-tarefas>
-  </mat-tab>
-
-  <mat-tab label="Tarefas Concluídas" >
-    <app-tarefas-concluidas *ngIf="step === TarefaSteps.CONCLUIDAS"></app-tarefas-concluidas>
-  </mat-tab>
-
-  <mat-tab label="Tarefas Pendentes">
-    <app-tarefas-pendentes *ngIf="step === TarefaSteps.PENDENTES"></app-tarefas-pendentes>
-  </mat-tab>
-</mat-tab-group>
+<app-tarefas-home></app-tarefas-home>
