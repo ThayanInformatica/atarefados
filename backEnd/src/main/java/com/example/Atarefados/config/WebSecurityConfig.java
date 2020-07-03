@@ -38,11 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        //----
 
         httpSecurity.csrf().disable().authorizeRequests()
-                .antMatchers("/").permitAll()
                 .antMatchers(HttpMethod.POST, "/login/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/usuarios").permitAll()
                 .antMatchers(HttpMethod.POST, "/usuarios/verificar-usuario").permitAll()
-                .antMatchers(HttpMethod.GET, "/tarefas/todas-tarefas").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 // filtra requisições de login

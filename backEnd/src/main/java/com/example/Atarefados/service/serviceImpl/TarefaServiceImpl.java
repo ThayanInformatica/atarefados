@@ -53,7 +53,7 @@ public class TarefaServiceImpl implements TarefaService {
         DenunciaTarefa denunciaTarefaSearch = denunciaTarefaRepository.findAllByUsuarioIdUsuarioAndTarefaIdTarefa(denunciaTarefa.getUsuario().getIdUsuario(), denunciaTarefa.getTarefa().getIdTarefa());
 
         if (denunciaTarefaSearch != null) {
-            throw new ApplicationException("Usuario já denunciou essa tarefa");
+            throw new ApplicationException("Tarefa ja foi denunciada!");
         }
 
         denunciaTarefaRepository.save(denunciaTarefa);

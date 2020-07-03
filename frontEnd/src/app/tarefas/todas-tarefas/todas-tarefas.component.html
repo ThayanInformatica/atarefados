@@ -41,7 +41,7 @@
         <mat-icon matTooltip="Não concluída" *ngIf="!element.estadoTarefa.concluida" class="icon-pendente">warning
         </mat-icon>
       </button>
-      <button mat-button *ngIf="element.estadoTarefa.concluida" (click)="openDialog(element)">
+      <button mat-button *ngIf="element.estadoTarefa.concluida" (click)="openDialog(element.tarefa)">
         <mat-icon matTooltip="Denunciar" class="icon-denuncia">report</mat-icon>
       </button>
     </td>

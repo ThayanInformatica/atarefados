@@ -26,7 +26,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         UsuarioLogin usuario = usuarioLoginRepository.findbyLogin(login);
 
         if (usuario != null) {
-            return User.withUsername(usuario.getLogin()).password(passwordEncoder.encode(usuario.getSenha())).roles("CLIENT").build();
+            if (usuario.getLogin().equals("administrador")) {
+                return User.withUsername(usuario.getLogin()).password(passwordEncoder.encode(usuario.getSenha())).roles("ADMIN").build();
+            } else {
+                return User.withUsername(usuario.getLogin()).password(passwordEncoder.encode(usuario.getSenha())).roles("CLIENT").build();
+            }
         } else {
             throw new UsernameNotFoundException("Não foi possível encontrar o usuário " + login);
         }
