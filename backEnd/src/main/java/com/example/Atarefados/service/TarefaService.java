@@ -14,5 +14,5 @@ public interface TarefaService {
 
     void denunciarTarefa(DenunciaTarefa denunciaTarefa);
 
-    List<TarefaEstadoDTO> recuperarTarefasDoUsuarioPorDataDiaria(Optional<Long> idUsuario);
+    List<TarefaEstadoDTO> recuperarTarefasDoUsuarioPorDataDiaria(Optional<String> idUsuario);
 }

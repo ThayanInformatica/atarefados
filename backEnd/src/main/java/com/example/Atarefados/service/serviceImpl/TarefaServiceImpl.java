@@ -60,12 +60,12 @@ public class TarefaServiceImpl implements TarefaService {
     }
 
     @Override
-    public List<TarefaEstadoDTO> recuperarTarefasDoUsuarioPorDataDiaria(Optional<Long> idUsuario) {
+    public List<TarefaEstadoDTO> recuperarTarefasDoUsuarioPorDataDiaria(Optional<String> idUsuario) {
         List<Tarefa> tarefas = new ArrayList<>();
-        if (idUsuario.isPresent()) {
-            tarefas = tarefaRepository.recuperarTarefasDoUsuarioPorDataDiaria(idUsuario.get());
-        } else {
+        if (idUsuario.get().equals("null")) {
             tarefas = tarefaRepository.recuperarTodasTarefasDoDia();
+        } else {
+            tarefas = tarefaRepository.recuperarTarefasDoUsuarioPorDataDiaria(Long.parseLong(idUsuario.get()));
         }
         List<TarefaEstadoDTO> tarefaEstadoDTOS = new ArrayList<>();
         tarefas.forEach(tarefa -> {
@@ -73,7 +73,7 @@ public class TarefaServiceImpl implements TarefaService {
             tarefaEstadoDTO.setTarefa(tarefa);
 
             EstadoTarefa estadoTarefa = estadoTarefaRepository.findByTarefa(tarefa);
-            if (estadoTarefa == null){
+            if (estadoTarefa == null) {
                 tarefaEstadoDTO.setEstadoTarefa(new EstadoTarefa());
             } else {
                 tarefaEstadoDTO.setEstadoTarefa(estadoTarefa);

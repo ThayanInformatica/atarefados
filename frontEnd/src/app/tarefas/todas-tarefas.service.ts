@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {TarefaModel} from '../shared/models/Tarefa.model';
 import {Observable, throwError} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {EstadoTarefaModel} from '../shared/models/EstadoTarefa.model';
 import {DenunciaModel} from "../shared/models/Denuncia.model";
 import {TarefaEstadoDto} from "../shared/models/dto/TarefaEstado.dto";
@@ -24,7 +24,11 @@ export class TodasTarefasService {
   }
 
   recuperarTodasMinhasTarefasDoDia(idUsuario: number): Observable<TarefaEstadoDto[]> {
-    return this.http.get<TarefaEstadoDto[]>(this.baseUrl + '/tarefas/minhas-tarefas/' + idUsuario)
+
+    // let httpParams = new HttpParams();
+    // httpParams.set("idUsuario", idUsuario.toString());
+
+    return this.http.get<TarefaEstadoDto[]>(`${this.baseUrl}/tarefas/minhas-tarefas/${idUsuario}`)
       .map(res => res)
       .catch((error: object) => throwError(error));
   }
@@ -44,8 +48,8 @@ export class TodasTarefasService {
   denunciaTarefa(denunciaModel: DenunciaModel): Observable<DenunciaModel> {
     debugger
     return this.http.post<DenunciaModel>(this.baseUrl + '/tarefas/denunciar-tarefa/', denunciaModel)
-        .map(res => res)
-        .catch((error: object) => throwError(error));
+      .map(res => res)
+      .catch((error: object) => throwError(error));
   }
 
 }

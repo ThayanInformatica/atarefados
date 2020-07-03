@@ -28,7 +28,7 @@ public class ControllerTarefa {
     private TarefaService tarefaService;
 
     @GetMapping("/todas-tarefas")
-    public ResponseEntity<List<Tarefa>> recuperarTodasTarefas(){
+    public ResponseEntity<List<Tarefa>> recuperarTodasTarefas() {
 
         List<Tarefa> tarefas = tarefaRepository.findAllByOrderByDataTarefaDesc();
 
@@ -36,7 +36,7 @@ public class ControllerTarefa {
     }
 
     @GetMapping("/minhas-tarefas/{idUsuario}")
-    public ResponseEntity<?> recuperarTodasTarefas(@RequestParam(name="idUsuario", required = false) Optional<Long> idUsuario){
+    public ResponseEntity<?> recuperarTodasTarefas(@PathVariable(name = "idUsuario", required = false) final Optional<String> idUsuario) {
 
         List<TarefaEstadoDTO> minhasTarefas = tarefaService.recuperarTarefasDoUsuarioPorDataDiaria(idUsuario);
 
@@ -44,7 +44,7 @@ public class ControllerTarefa {
     }
 
     @PutMapping("/concluir-tarefa/")
-    public ResponseEntity<?> concluirTarefa(@Valid @RequestBody Tarefa tarefa){
+    public ResponseEntity<?> concluirTarefa(@Valid @RequestBody Tarefa tarefa) {
 
         EstadoTarefa estadoTarefa = tarefaService.concluirTarefa(tarefa);
 
