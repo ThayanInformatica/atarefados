@@ -20,4 +20,11 @@ public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
     @Query("SELECT t FROM Tarefa t Where t.dataTarefa = CURRENT_DATE() ")
     List<Tarefa> recuperarTodasTarefasDoDia();
 
+    // Recupera todas as tarefas pendentes
+    @Query("SELECT t FROM Tarefa t Where t.estadoTarefa.pendente = true")
+    List<Tarefa> recuperarTodasTarefasPendentes();
+
+    // Recupera todas as tarefas pendentes
+    @Query("SELECT t FROM Tarefa t Where t.estadoTarefa.concluida = true")
+    List<Tarefa> recuperarTodasTarefasConcluidas();
 }

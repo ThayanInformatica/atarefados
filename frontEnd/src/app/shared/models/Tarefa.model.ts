@@ -8,5 +8,6 @@ export class TarefaModel {
   nomeTarefa: string;
   dataTarefa: string;
   usuario: UsuarioModel;
+  estadoTarefa: EstadoTarefaModel;
   denunciaTarefa: DenunciaModel;
 }

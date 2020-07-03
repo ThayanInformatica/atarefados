@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.xml.ws.Response;
 import java.util.List;
 
 @RestController
@@ -62,4 +63,17 @@ public class ControllerTarefa {
         return ResponseEntity.status(HttpStatus.OK).body(denunciaTarefa);
     }
 
+    @GetMapping("/pendentes")
+    private ResponseEntity<?> recuperarTarefasPendentes(){
+        List<Tarefa> tarefas = tarefaRepository.recuperarTodasTarefasPendentes();
+
+        return ResponseEntity.status(HttpStatus.OK).body(tarefas);
+    }
+
+    @GetMapping("/concluidas")
+    private ResponseEntity<List<Tarefa>> recuperarTarefasConcluidas(){
+        List<Tarefa> tarefas = tarefaRepository.recuperarTodasTarefasConcluidas();
+
+        return ResponseEntity.status(HttpStatus.OK).body(tarefas);
+    }
 }

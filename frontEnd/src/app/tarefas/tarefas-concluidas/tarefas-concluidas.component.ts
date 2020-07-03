@@ -1,3 +1,5 @@
+import { TodasTarefasService } from './../todas-tarefas.service';
+import { TarefaModel } from './../../shared/models/Tarefa.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TarefasConcluidasComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns: string[] = ['nomeTarefa', 'dataTarefa', 'descricao', 'usuario', 'estado'];
+  todasTarefasConcluidas: TarefaModel;
+
+  constructor(private tarefaService: TodasTarefasService) { }
 
   ngOnInit() {
+    this.recuperarTarefasConcluidas();
   }
 
+  recuperarTarefasConcluidas(){
+    this.tarefaService.recuperarTarefasConcluidas()
+      .subscribe(data => {
+        this.todasTarefasConcluidas = data;
+      })
+  }
 }

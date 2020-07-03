@@ -46,4 +46,16 @@ export class TodasTarefasService {
       .catch((error: object) => throwError(error));
   }
 
+  recuperarTarefasPendentes(): Observable<TarefaModel>{
+    return this.http.get<TarefaModel>(`${this.baseUrl}/tarefas/pendentes`)
+      .map(res => res)
+      .catch((error: object) => throwError(error));
+  }
+
+  recuperarTarefasConcluidas(): Observable<TarefaModel>{
+    return this.http.get<TarefaModel>(`${this.baseUrl}/tarefas/concluidas`)
+    .map(res => res)
+    .catch((error: object) => throwError(error));
+  }
+
 }
