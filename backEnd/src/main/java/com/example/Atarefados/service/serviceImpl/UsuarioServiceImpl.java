@@ -3,6 +3,7 @@ package com.example.Atarefados.service.serviceImpl;
 import com.example.Atarefados.exception.ApplicationException;
 import com.example.Atarefados.model.Usuario;
 import com.example.Atarefados.model.UsuarioLogin;
+import com.example.Atarefados.model.dto.UsuarioDTO;
 import com.example.Atarefados.repository.UsuarioLoginRepository;
 import com.example.Atarefados.repository.UsuarioRepository;
 import com.example.Atarefados.service.UsuarioService;
@@ -25,17 +26,17 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Transactional
     @Override
-    public Usuario criarUsuario(Usuario usuario) {
+    public Usuario criarUsuario(UsuarioDTO usuarioDTO) {
 
-        UsuarioLogin usuarioLogin = usuarioLoginRepository.findbyLogin(usuario.getUsuarioLogin().getLogin());
-        if (usuarioLogin != null){
+        UsuarioLogin usuarioLogin = usuarioLoginRepository.findbyLogin(usuarioDTO.getUsuarioLogin().getLogin());
+        if (usuarioLogin != null) {
             throw new ApplicationException("Usuario ja esta cadastrado");
         }
-        usuarioLoginRepository.save(usuario.getUsuarioLogin());
 
-        usuarioRepository.save(usuario);
+        UsuarioLogin usuarioLoginSalvo = usuarioLoginRepository.save(usuarioDTO.getUsuarioLogin());
+        usuarioDTO.getUsuario().setUsuarioLogin(usuarioLoginSalvo);
+        return usuarioRepository.save(usuarioDTO.getUsuario());
 
-        return usuario;
     }
 
     @Override

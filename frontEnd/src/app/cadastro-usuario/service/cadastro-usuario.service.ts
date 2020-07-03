@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {UsuarioLoginModel} from "../../shared/models/UsuarioLogin.model";
 import {Observable, throwError} from "rxjs";
 import {UsuarioModel} from "../../shared/models/Usuario.model";
+import {UsuarioDto} from "../../shared/models/dto/Usuario.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,9 @@ export class CadastroUsuarioService {
 
   constructor(private http: HttpClient) { }
 
-  cadastrarUsuario(usuario: UsuarioModel): Observable<UsuarioModel> {
-    return this.http.post( this.baseUrl + '/usuarios', usuario)
-      .map(res => usuario)
+  cadastrarUsuario(usuarioDto: UsuarioDto): Observable<UsuarioModel> {
+    return this.http.post<UsuarioModel>( this.baseUrl + '/usuarios', usuarioDto)
+      .map(res => res)
       .catch((error: object) => throwError(error));
   }
 }

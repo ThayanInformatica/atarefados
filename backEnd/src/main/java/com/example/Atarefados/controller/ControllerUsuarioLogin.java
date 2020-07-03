@@ -3,6 +3,7 @@ package com.example.Atarefados.controller;
 
 import com.example.Atarefados.model.Usuario;
 import com.example.Atarefados.model.UsuarioLogin;
+import com.example.Atarefados.model.dto.UsuarioDTO;
 import com.example.Atarefados.repository.UsuarioLoginRepository;
 import com.example.Atarefados.repository.UsuarioRepository;
 import com.example.Atarefados.service.UsuarioService;
@@ -35,10 +36,9 @@ public class ControllerUsuarioLogin {
 
 
     @PostMapping
-    public ResponseEntity<Usuario> criaUsuario(@Valid @RequestBody  Usuario usuario){
+    public ResponseEntity<Usuario> criaUsuario(@RequestBody UsuarioDTO usuarioDTO){
 
-        Usuario usuarioSalvo = usuarioService.criarUsuario(usuario);
-
+        Usuario usuarioSalvo = usuarioService.criarUsuario(usuarioDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioSalvo);
     }
 
