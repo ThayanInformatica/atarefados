@@ -4,7 +4,6 @@ import {TodasTarefasService} from '../todas-tarefas.service';
 import {Conversoes} from '../../shared/utils/conversoes';
 import {UsuarioModel} from '../../shared/models/Usuario.model';
 import {TokenStorage} from '../../core/token.storage';
-import {EstadoTarefaModel} from '../../shared/models/EstadoTarefa.model';
 import {MatDialog} from "@angular/material/dialog";
 import {MinhasTarefasDialogComponent} from "./dialog/minhas-tarefas-dialog-component";
 import {TodasTarefasComponent} from "../todas-tarefas/todas-tarefas.component";
@@ -22,7 +21,7 @@ import {TarefaEstadoDto} from "../../shared/models/dto/TarefaEstado.dto";
 export class MinhasTarefasComponent implements OnInit {
 
   public todasMinhasTarefas: TarefaEstadoDto[] = [];
-  todasTarefas: TarefaModel[];
+  todasTarefas: TarefaEstadoDto[];
   private usuarioModel: UsuarioModel = this.token.getUsuarioLogado();
   displayedColumns: string[] = ['nomeTarefa', 'dataTarefa', 'descricao', 'acao', 'conclusao'];
 
@@ -44,7 +43,6 @@ export class MinhasTarefasComponent implements OnInit {
     this.todasTarefasService.recuperarTodasMinhasTarefasDoDia(this.usuarioModel.idUsuario).subscribe(data => {
       this.todasMinhasTarefas = data;
 
-      debugger
       this.carregarTodasAsTarefas();
     });
   }

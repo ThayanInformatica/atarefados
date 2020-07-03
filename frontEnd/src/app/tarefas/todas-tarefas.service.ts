@@ -17,14 +17,14 @@ export class TodasTarefasService {
   constructor(private http: HttpClient) {
   }
 
-  recuperarTodasTarefasDoDia(): Observable<TarefaModel[]> {
-    return this.http.get<TarefaModel[]>(this.baseUrl + '/tarefas/todas-tarefas-do-dia')
+  recuperarTodasTarefasDoDia(): Observable<TarefaEstadoDto[]> {
+    return this.http.get<TarefaEstadoDto[]>(this.baseUrl + '/tarefas/minhas-tarefas/' + null)
       .map(res => res)
       .catch((error: object) => throwError(error));
   }
 
   recuperarTodasMinhasTarefasDoDia(idUsuario: number): Observable<TarefaEstadoDto[]> {
-    return this.http.get<TarefaEstadoDto[]>(this.baseUrl + '/tarefas/minhas-tarafas/' + idUsuario)
+    return this.http.get<TarefaEstadoDto[]>(this.baseUrl + '/tarefas/minhas-tarefas/' + idUsuario)
       .map(res => res)
       .catch((error: object) => throwError(error));
   }

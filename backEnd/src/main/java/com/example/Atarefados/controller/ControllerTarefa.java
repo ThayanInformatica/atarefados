@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/tarefas")
@@ -34,20 +35,12 @@ public class ControllerTarefa {
         return ResponseEntity.status(HttpStatus.OK).body(tarefas);
     }
 
-    @GetMapping("/minhas-tarafas/{idUsuario}")
-    public ResponseEntity<?> recuperarTodasTarefas(@PathVariable Long idUsuario){
+    @GetMapping("/minhas-tarefas/{idUsuario}")
+    public ResponseEntity<?> recuperarTodasTarefas(@RequestParam(name="idUsuario", required = false) Optional<Long> idUsuario){
 
         List<TarefaEstadoDTO> minhasTarefas = tarefaService.recuperarTarefasDoUsuarioPorDataDiaria(idUsuario);
 
         return ResponseEntity.status(HttpStatus.OK).body(minhasTarefas);
-    }
-
-    @GetMapping("/todas-tarefas-do-dia")
-    public ResponseEntity<List<Tarefa>> recuperarTodasTarefasDoDia(){
-
-        List<Tarefa> tarefas = tarefaRepository.recuperarTodasTarefasDoDia();
-
-        return ResponseEntity.status(HttpStatus.OK).body(tarefas);
     }
 
     @PutMapping("/concluir-tarefa/")

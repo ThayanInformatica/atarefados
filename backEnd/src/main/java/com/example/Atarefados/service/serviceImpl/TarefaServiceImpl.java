@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TarefaServiceImpl implements TarefaService {
@@ -59,15 +60,24 @@ public class TarefaServiceImpl implements TarefaService {
     }
 
     @Override
-    public List<TarefaEstadoDTO> recuperarTarefasDoUsuarioPorDataDiaria(Long idUsuario) {
-        List<Tarefa> tarefas = tarefaRepository.recuperarTarefasDoUsuarioPorDataDiaria(idUsuario);
+    public List<TarefaEstadoDTO> recuperarTarefasDoUsuarioPorDataDiaria(Optional<Long> idUsuario) {
+        List<Tarefa> tarefas = new ArrayList<>();
+        if (idUsuario.isPresent()) {
+            tarefas = tarefaRepository.recuperarTarefasDoUsuarioPorDataDiaria(idUsuario.get());
+        } else {
+            tarefas = tarefaRepository.recuperarTodasTarefasDoDia();
+        }
         List<TarefaEstadoDTO> tarefaEstadoDTOS = new ArrayList<>();
         tarefas.forEach(tarefa -> {
             TarefaEstadoDTO tarefaEstadoDTO = new TarefaEstadoDTO();
             tarefaEstadoDTO.setTarefa(tarefa);
 
             EstadoTarefa estadoTarefa = estadoTarefaRepository.findByTarefa(tarefa);
-            tarefaEstadoDTO.setEstadoTarefa(estadoTarefa);
+            if (estadoTarefa == null){
+                tarefaEstadoDTO.setEstadoTarefa(new EstadoTarefa());
+            } else {
+                tarefaEstadoDTO.setEstadoTarefa(estadoTarefa);
+            }
             tarefaEstadoDTOS.add(tarefaEstadoDTO);
         });
 
