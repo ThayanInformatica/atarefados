@@ -19,7 +19,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class TodasTarefasComponent implements OnInit {
 
   @Input() todasTarefas: TarefaModel[] = [];
-           denunciaModel: DenunciaModel = new DenunciaModel();
+  denunciaModel: DenunciaModel = new DenunciaModel();
 
   displayedColumns: string[] = ['nomeTarefa', 'dataTarefa', 'descricao', 'usuario', 'status'];
 
@@ -53,6 +53,8 @@ export class TodasTarefasComponent implements OnInit {
         this.snackBar.open(error.error.message, 'error', { duration: 3000 });
       });
     });
+    dialogRef.afterClosed().subscribe(() => {
+    })
   }
 
 }

@@ -1,11 +1,8 @@
 package com.example.Atarefados.controller;
 
-
 import com.example.Atarefados.model.DenunciaTarefa;
 import com.example.Atarefados.model.EstadoTarefa;
 import com.example.Atarefados.model.Tarefa;
-import com.example.Atarefados.model.dto.TarefaEstadoDTO;
-import com.example.Atarefados.repository.EstadoTarefaRepository;
 import com.example.Atarefados.repository.TarefaRepository;
 import com.example.Atarefados.service.TarefaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/tarefas")
@@ -28,25 +24,33 @@ public class ControllerTarefa {
     private TarefaService tarefaService;
 
     @GetMapping("/todas-tarefas")
-    public ResponseEntity<List<Tarefa>> recuperarTodasTarefas() {
+    public ResponseEntity<List<Tarefa>> recuperarTodasTarefas(){
 
         List<Tarefa> tarefas = tarefaRepository.findAllByOrderByDataTarefaDesc();
 
         return ResponseEntity.status(HttpStatus.OK).body(tarefas);
     }
 
-    @GetMapping("/minhas-tarefas/{idUsuario}")
-    public ResponseEntity<?> recuperarTodasTarefas(@PathVariable(name = "idUsuario", required = false) final Optional<String> idUsuario) {
+    @GetMapping("/minhas-tarafas/{idUsuario}")
+    public ResponseEntity<List<Tarefa>> recuperarTodasTarefas(@PathVariable Long idUsuario){
 
-        List<TarefaEstadoDTO> minhasTarefas = tarefaService.recuperarTarefasDoUsuarioPorDataDiaria(idUsuario);
+        List<Tarefa> minhasTarefas = tarefaRepository.recuperarTarefasDoUsuarioPorDataDiaria(idUsuario);
 
         return ResponseEntity.status(HttpStatus.OK).body(minhasTarefas);
     }
 
-    @PutMapping("/concluir-tarefa/")
-    public ResponseEntity<?> concluirTarefa(@Valid @RequestBody Tarefa tarefa) {
+    @GetMapping("/todas-tarefas-do-dia")
+    public ResponseEntity<List<Tarefa>> recuperarTodasTarefasDoDia(){
 
-        EstadoTarefa estadoTarefa = tarefaService.concluirTarefa(tarefa);
+        List<Tarefa> tarefas = tarefaRepository.recuperarTodasTarefasDoDia();
+
+        return ResponseEntity.status(HttpStatus.OK).body(tarefas);
+    }
+
+    @PutMapping("/concluir-tarefa/")
+    public ResponseEntity<EstadoTarefa> concluirTarefa(@Valid @RequestBody EstadoTarefa estadoTarefa){
+
+        tarefaService.concluirTarefa(estadoTarefa);
 
         return ResponseEntity.status(HttpStatus.OK).body(estadoTarefa);
     }

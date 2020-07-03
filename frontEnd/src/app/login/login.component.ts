@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   registerForm: FormGroup;
   submitted = false;
+  usuarioLoginModel = new UsuarioLoginModel()
 
   constructor(private formBuilder: FormBuilder,
               private snackBar: MatSnackBar,
@@ -26,8 +27,7 @@ export class LoginComponent implements OnInit {
               private authService: AuthService,
               private token: TokenStorage,
               private usuarioLogado: UsuarioLogado,
-              private usuarioService: UsuarioLoginAuthService,
-              private usuarioLoginModel: UsuarioLoginModel) {
+              private usuarioService: UsuarioLoginAuthService) {
   }
 
   ngOnInit() {
@@ -50,6 +50,8 @@ export class LoginComponent implements OnInit {
       data => {
         this.token.saveToken(data);
         this.router.navigate(['home']);
+      }, () => {
+        alert("erro");
       }
     );
   }
@@ -60,12 +62,12 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.verificarUsuario();
-    this.login();
   }
 
   verificarUsuario() {
     this.usuarioService.verificarUsuario(this.usuarioLoginModel).subscribe(
       data => {
+        this.login();
         this.token.salvarUsuario(data);
       }, error => {
         console.log(error);

@@ -5,7 +5,6 @@ import com.example.Atarefados.model.DenunciaTarefa;
 import com.example.Atarefados.model.EstadoTarefa;
 import com.example.Atarefados.model.Tarefa;
 import com.example.Atarefados.model.Usuario;
-import com.example.Atarefados.model.dto.TarefaEstadoDTO;
 import com.example.Atarefados.repository.DenunciaTarefaRepository;
 import com.example.Atarefados.repository.EstadoTarefaRepository;
 import com.example.Atarefados.repository.TarefaRepository;
@@ -17,9 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TarefaServiceImpl implements TarefaService {
@@ -39,12 +35,11 @@ public class TarefaServiceImpl implements TarefaService {
 
     @Transactional
     @Override
-    public EstadoTarefa concluirTarefa(Tarefa tarefa) {
-        EstadoTarefa estadoTarefa = new EstadoTarefa();
+    public void concluirTarefa(EstadoTarefa estadoTarefa) {
         estadoTarefa.setConcluida(true);
+        estadoTarefa.setPendente(false);
         estadoTarefa.setDataConclusao(LocalDateTime.now());
-        estadoTarefa.setTarefa(tarefa);
-        return estadoTarefaRepository.save(estadoTarefa);
+        estadoTarefaRepository.save(estadoTarefa);
     }
 
     @Override
@@ -53,34 +48,9 @@ public class TarefaServiceImpl implements TarefaService {
         DenunciaTarefa denunciaTarefaSearch = denunciaTarefaRepository.findAllByUsuarioIdUsuarioAndTarefaIdTarefa(denunciaTarefa.getUsuario().getIdUsuario(), denunciaTarefa.getTarefa().getIdTarefa());
 
         if (denunciaTarefaSearch != null) {
-            throw new ApplicationException("Tarefa ja foi denunciada!");
+            throw new ApplicationException("Usuario já denunciou essa tarefa");
         }
 
         denunciaTarefaRepository.save(denunciaTarefa);
-    }
-
-    @Override
-    public List<TarefaEstadoDTO> recuperarTarefasDoUsuarioPorDataDiaria(Optional<String> idUsuario) {
-        List<Tarefa> tarefas = new ArrayList<>();
-        if (idUsuario.get().equals("null")) {
-            tarefas = tarefaRepository.recuperarTodasTarefasDoDia();
-        } else {
-            tarefas = tarefaRepository.recuperarTarefasDoUsuarioPorDataDiaria(Long.parseLong(idUsuario.get()));
-        }
-        List<TarefaEstadoDTO> tarefaEstadoDTOS = new ArrayList<>();
-        tarefas.forEach(tarefa -> {
-            TarefaEstadoDTO tarefaEstadoDTO = new TarefaEstadoDTO();
-            tarefaEstadoDTO.setTarefa(tarefa);
-
-            EstadoTarefa estadoTarefa = estadoTarefaRepository.findByTarefa(tarefa);
-            if (estadoTarefa == null) {
-                tarefaEstadoDTO.setEstadoTarefa(new EstadoTarefa());
-            } else {
-                tarefaEstadoDTO.setEstadoTarefa(estadoTarefa);
-            }
-            tarefaEstadoDTOS.add(tarefaEstadoDTO);
-        });
-
-        return tarefaEstadoDTOS;
     }
 }

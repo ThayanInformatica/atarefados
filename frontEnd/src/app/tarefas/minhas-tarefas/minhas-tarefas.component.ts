@@ -4,12 +4,12 @@ import {TodasTarefasService} from '../todas-tarefas.service';
 import {Conversoes} from '../../shared/utils/conversoes';
 import {UsuarioModel} from '../../shared/models/Usuario.model';
 import {TokenStorage} from '../../core/token.storage';
+import {EstadoTarefaModel} from '../../shared/models/EstadoTarefa.model';
 import {MatDialog} from "@angular/material/dialog";
 import {MinhasTarefasDialogComponent} from "./dialog/minhas-tarefas-dialog-component";
 import {TodasTarefasComponent} from "../todas-tarefas/todas-tarefas.component";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {TarefaEstadoDto} from "../../shared/models/dto/TarefaEstado.dto";
 
 @Component({
   selector: 'app-minhas-tarefas',
@@ -20,8 +20,8 @@ import {TarefaEstadoDto} from "../../shared/models/dto/TarefaEstado.dto";
 
 export class MinhasTarefasComponent implements OnInit {
 
-  public todasMinhasTarefas: TarefaEstadoDto[] = [];
-  todasTarefas: TarefaEstadoDto[];
+  public todasMinhasTarefas: TarefaModel[];
+  todasTarefas: TarefaModel[];
   private usuarioModel: UsuarioModel = this.token.getUsuarioLogado();
   displayedColumns: string[] = ['nomeTarefa', 'dataTarefa', 'descricao', 'acao', 'conclusao'];
 
@@ -54,18 +54,18 @@ export class MinhasTarefasComponent implements OnInit {
     });
   }
 
-  concluirTarefa(tarefaModel: TarefaModel) {
-    this.openDialog(tarefaModel);
+  concluirTarefa(estadoTarefaModel: EstadoTarefaModel) {
+    this.openDialog(estadoTarefaModel);
   }
 
-  openDialog(tarefaModel: TarefaModel): void {
+  openDialog(estadoTarefaModel: EstadoTarefaModel): void {
     const dialogRef = this.dialog.open(MinhasTarefasDialogComponent, {
-      width: '250px'
-    }
+        width: '250px'
+      }
     );
     dialogRef.componentInstance.onAdd.subscribe(() => {
 
-      this.todasTarefasService.concluirTarefa(tarefaModel).subscribe(result => {
+      this.todasTarefasService.concluirTarefa(estadoTarefaModel).subscribe(result => {
         this.carregarTodasMinhasAsTarefas();
       }, error => {
         this.snackBar.open(error.error.message, 'error', { duration: 3000 });

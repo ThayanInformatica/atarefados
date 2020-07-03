@@ -17,10 +17,10 @@ public class EstadoTarefa {
     private Long idEstado;
 
     @Column(name = "concluida")
-    private Boolean concluida;
+    private Boolean concluida = false;
 
     @Column(name = "pendente")
-    private Boolean pendente = false;
+    private Boolean pendente = true;
 
     @Column(name = "nao_feita")
     private Boolean naoFeita = false;
@@ -30,9 +30,4 @@ public class EstadoTarefa {
 
     @Column(name = "data_conclusao")
     private LocalDateTime dataConclusao;
-
-    @OneToOne
-    @JoinColumn(name = "id_tarefa")
-    private Tarefa tarefa;
-
 }
