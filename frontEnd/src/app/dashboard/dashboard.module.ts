@@ -24,7 +24,7 @@ const routes: Routes = [
     HomeModule
   ],
   entryComponents: [],
-  exports: [],
+  exports: [DashboardComponent],
   providers: []
 })
 export class DashboardModule {

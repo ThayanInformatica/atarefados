@@ -1,3 +1,4 @@
+import { NovaTarefaComponent } from './../tarefas/nova-tarefa/nova-tarefa.component';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {MinhasTarefasComponent} from "../tarefas/minhas-tarefas/minhas-tarefas.component";
@@ -8,7 +9,7 @@ import {MinhasTarefasDialogComponent} from "../tarefas/minhas-tarefas/dialog/min
 import {DenunciaTarefaDialogComponent} from "../tarefas/todas-tarefas/dialog/denuncia-tarefa-dialog-component";
 import {HomeComponent} from "./home.component";
 import {CustomMaterialModule} from "../core/material.module";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {SharedModule} from "../shared/shared.module";
 import { TarefasHomeComponent } from './tarefas-home/tarefas-home.component';
@@ -27,13 +28,15 @@ const routes: Routes = [
     MinhasTarefasDialogComponent,
     DenunciaTarefaDialogComponent,
     TarefasHomeComponent,
+    NovaTarefaComponent
   ],
   imports: [
     CommonModule,
     CustomMaterialModule,
     FormsModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   entryComponents: [
     TarefasConcluidasComponent,
@@ -49,6 +52,7 @@ const routes: Routes = [
     TarefasPendentesComponent,
     HomeComponent,
     TarefasHomeComponent,
+    NovaTarefaComponent
   ],
   providers: [MinhasTarefasDialogComponent, DenunciaTarefaDialogComponent]
 })

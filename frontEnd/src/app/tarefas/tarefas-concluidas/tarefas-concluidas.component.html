@@ -12,7 +12,7 @@
   <!-- Name Column -->
   <ng-container matColumnDef="dataTarefa">
     <th mat-header-cell *matHeaderCellDef> Data tarefa </th>
-    <td mat-cell *matCellDef="let tarefas"> {{tarefas.dataTarefa}} </td>
+    <td mat-cell *matCellDef="let tarefas"> {{tarefas.dataTarefa | date: 'dd/MM/yyyy - HH:mm'}} </td>
   </ng-container>
 
   <!-- Weight Column -->
@@ -29,7 +29,7 @@
   <!-- Symbol Column -->
   <ng-container matColumnDef="estado">
     <th mat-header-cell *matHeaderCellDef> Data de conclusão </th>
-    <td mat-cell *matCellDef="let tarefas"> {{tarefas.estadoTarefa.dataConclusao}} </td>
+    <td mat-cell *matCellDef="let tarefas"> {{tarefas.estadoTarefa.dataConclusao | date: 'dd/MM/yyyy - HH:mm'}} </td>
   </ng-container>
 
 

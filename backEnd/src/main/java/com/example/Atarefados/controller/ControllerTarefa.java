@@ -3,6 +3,7 @@ package com.example.Atarefados.controller;
 import com.example.Atarefados.model.DenunciaTarefa;
 import com.example.Atarefados.model.EstadoTarefa;
 import com.example.Atarefados.model.Tarefa;
+import com.example.Atarefados.repository.EstadoTarefaRepository;
 import com.example.Atarefados.repository.TarefaRepository;
 import com.example.Atarefados.service.TarefaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class ControllerTarefa {
 
     @Autowired
     private TarefaService tarefaService;
+
+    @Autowired
+    private EstadoTarefaRepository estadoTarefaRepository;
 
     @GetMapping("/todas-tarefas")
     public ResponseEntity<List<Tarefa>> recuperarTodasTarefas(){
@@ -75,5 +79,17 @@ public class ControllerTarefa {
         List<Tarefa> tarefas = tarefaRepository.recuperarTodasTarefasConcluidas();
 
         return ResponseEntity.status(HttpStatus.OK).body(tarefas);
+    }
+
+    @PostMapping()
+    private ResponseEntity<Tarefa> criarTarefa(@RequestBody Tarefa tarefa){
+        Tarefa novaTarefa = tarefaRepository.save(tarefa);
+        return ResponseEntity.status(HttpStatus.OK).body(novaTarefa);
+    }
+
+    @PostMapping("/estado-tarefa")
+    private ResponseEntity<EstadoTarefa> criarEstadoTarefa(@RequestBody EstadoTarefa  estadoTarefa){
+        EstadoTarefa novoEstadoTarefa = estadoTarefaRepository.save(estadoTarefa);
+        return ResponseEntity.status(HttpStatus.OK).body(novoEstadoTarefa);
     }
 }

@@ -58,4 +58,15 @@ export class TodasTarefasService {
     .catch((error: object) => throwError(error));
   }
 
+  criarEstadoTarefa(estadoTarefa: EstadoTarefaModel): Observable<EstadoTarefaModel>{
+    return this.http.post<EstadoTarefaModel>(`${this.baseUrl}/tarefas/estado-tarefa`, estadoTarefa)
+    .map(res => res)
+    .catch((error: object) => throwError(error));
+  }
+
+  criarTarefa(tarefa: TarefaModel): Observable<TarefaModel>{
+    return this.http.post<TarefaModel>(`${this.baseUrl}/tarefas`, tarefa)
+    .map(res => res)
+    .catch((error: object) => throwError(error));
+  }
 }

@@ -1,6 +1,7 @@
 package com.example.Atarefados.controller;
 
 
+import com.example.Atarefados.model.Tarefa;
 import com.example.Atarefados.model.Usuario;
 import com.example.Atarefados.model.UsuarioLogin;
 import com.example.Atarefados.model.dto.UsuarioDTO;
@@ -11,12 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.xml.ws.Response;
+import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -52,5 +52,8 @@ public class ControllerUsuarioLogin {
         return ResponseEntity.status(HttpStatus.OK).body(usuarioLogado);
     }
 
-
+    @GetMapping
+    private ResponseEntity<List<Usuario>> listarUsuarios(){
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioRepository.findAll());
+    }
 }

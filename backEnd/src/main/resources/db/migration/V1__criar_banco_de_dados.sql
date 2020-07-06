@@ -31,7 +31,7 @@ VALUES (1, 'Thayan Alves Pereira', '2020-02-02', 1);
 
 CREATE TABLE estado_tarefa
 (
-    id_estado_tarefa INT    NOT NULL AUTO_INCREMENT,
+    id_estado_tarefa INT     NOT NULL AUTO_INCREMENT,
     pendente         BOOLEAN DEFAULT 0,
     concluida        BOOLEAN DEFAULT 0,
     denuncia         BOOLEAN DEFAULT 0,

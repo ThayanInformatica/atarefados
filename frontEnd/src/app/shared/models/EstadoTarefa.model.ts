@@ -2,10 +2,10 @@ import {TarefaModel} from './Tarefa.model';
 
 export class EstadoTarefaModel {
   idEstado: number;
-  concluida: boolean;
-  pendente: boolean;
-  naoFeita: boolean;
-  denuncia: boolean;
+  concluida = false;
+  pendente = true;
+  naoFeita = false;
+  denuncia = false;
   dataConclusao: string;
   tarefa: TarefaModel;
 }

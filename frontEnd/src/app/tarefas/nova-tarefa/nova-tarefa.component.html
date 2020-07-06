@@ -1,0 +1,63 @@
+<app-header></app-header>
+<mat-toolbar cfxFlex="100">
+  <h2>Nova tarefa</h2>
+  <div class="ConteudoButton" fxFlex="98" fxLayoutAlign="end start">
+    <a mat-flat-button routerLink="/dashboard">Dashboard</a>
+  </div>
+</mat-toolbar>
+<form (ngSubmit)="onSubmit()" fxLayout="column" style="align-items: center;" [formGroup]="tarefaForm">
+  <div class="input-row" fxLayout="row" fxLayoutGap="20px" style="width: 40%">
+    <mat-form-field fxFlex>
+      <input formControlName="tarefaNome" matInput type="text" placeholder="Nome" [(ngModel)]="novaTarefa.nomeTarefa">
+    </mat-form-field>
+  </div>
+  <div class="input-row" fxLayout="row" fxLayoutGap="20px" style="width: 40%">
+    <mat-error *ngIf="verificaValidTouched('tarefaNome')">Nome é obrigatório</mat-error>
+  </div>
+
+  <div class="input-row" fxLayout="row" fxLayoutGap="20px" style="width: 40%">
+    <mat-form-field fxFlex>
+      <input matInput type="text" placeholder="Descrição" formControlName="tarefaDescricao" [(ngModel)]="novaTarefa.descricao">
+    </mat-form-field>
+  </div>
+
+  <div class="input-row" fxLayout="row" fxLayoutGap="20px" style="width: 40%">
+    <mat-error *ngIf="verificaValidTouched('tarefaDescricao')">Descrição é obrigatório</mat-error>
+  </div>
+
+  <div class="input-row" fxLayout="row" fxLayoutGap="20px" style="width: 40%">
+    <mat-form-field fxFlex>
+      <mat-label>Data</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="tarefaData" [(ngModel)]="novaTarefa.dataTarefa">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="input-row" fxLayout="row" fxLayoutGap="20px" style="width: 40%">
+    <mat-error *ngIf="verificaValidTouched('tarefaData')">Data é obrigatório</mat-error>
+    <mat-error *ngIf="verificaData('tarefaData')">
+      A menos que você seja um viajante do tempo, não é possível marcar uma tarefa no passado.
+    </mat-error>
+  </div>
+
+  <div class="input-row" fxLayout="row" fxLayoutGap="20px" style="width: 40%">
+    <mat-form-field fxFlex>
+      <mat-label>Usuário</mat-label>
+      <mat-select [(ngModel)]="selectedValue" formControlName="tarefaUsuario" [(ngModel)]="novaTarefa.usuario">
+        <mat-option *ngFor="let usuario of todosUsuarios" [value]="{ idUsuario: usuario.value, nomeUsuario: usuario.viewValue }">
+          {{usuario.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="input-row" fxLayout="row" fxLayoutGap="20px" style="width: 40%">
+    <mat-error *ngIf="verificaValidTouched('tarefaData')">A tarefa tem que ter um responsável</mat-error>
+  </div>
+
+  <div class="input-row" fxLayout="row" fxLayoutGap="20px" style="width: 40%">
+    <button mat-flat-button style="width: 50%">Voltar</button>
+    <button mat-flat-button color="primary" style="width: 50%" type="submit">Criar tarefa</button>
+  </div>
+</form>
