@@ -2,7 +2,7 @@
   <h1>Atarefados</h1>
   <div class="ConteudoButton" fxFlex="98" fxLayoutAlign="end start">
     <a mat-stroked-button *ngIf="!butao" [routerLink]="['/login']"  class="button-entrar">Entrar</a>
-    <a mat-stroked-button *ngIf="!butao"  [routerLink]="['/cadastrar-usuario']" class="button-cadastrar">Cadastrar</a>
+    <a mat-stroked-button *ngIf="!butao"  (click)="openDialog()" class="button-cadastrar">Cadastrar</a>
     <a mat-stroked-button *ngIf="butao" (click)="deslogar()" class="button-sair">Sair</a>
   </div>
 </mat-toolbar>

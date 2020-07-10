@@ -1,0 +1,69 @@
+<div fxLayout="row" fxLayoutGap fxLayoutAlign="space-evenly center">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="title">
+      <h2 mat-dialog-title style="font-size: 25px;"> Cadastro </h2>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-around center">
+      <div fxLayout="row" fxFlex>
+        <mat-form-field appearance="outline" class="space-input">
+          <mat-label>Usuario nome</mat-label>
+          <input matInput type="text" formControlName="login"
+                 [ngClass]="{ 'is-invalid': submitted && f.login.errors }" [(ngModel)]="usuarioLoginModel.login">
+          <div *ngIf="submitted && f.login.errors" class="invalid-feedback">
+            <div *ngIf="f.login.errors.required">Campo não preenchido</div>
+          </div>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nome completo</mat-label>
+          <input matInput type="text" formControlName="nomeUsuario" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f.nomeUsuario.errors }"
+                 [(ngModel)]="usuarioModel.nomeUsuario">
+          <div *ngIf="submitted && f.nomeUsuario.errors" class="invalid-feedback">
+            <div *ngIf="f.nomeUsuario.errors.required">Campo não preenchido</div>
+          </div>
+        </mat-form-field>
+        <br>
+      </div>
+      <div fxLayout="row" fxFlexAlign="end">
+        <mat-form-field appearance="outline" class="space-input">
+          <mat-label>Senha</mat-label>
+          <input matInput type="text" formControlName="senha" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f.senha.errors }" [(ngModel)]="usuarioLoginModel.senha">
+          <div *ngIf="submitted && f.senha.errors" class="invalid-feedback">
+            <div *ngIf="f.senha.errors.required">Campo não preenchido</div>
+          </div>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline" class="input-space">
+          <mat-label>Confirmar senha</mat-label>
+          <input matInput type="text" formControlName="confirmaSenha" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f.confirmaSenha.errors }">
+          <div *ngIf="submitted && f.confirmaSenha.errors" class="invalid-feedback">
+            <div *ngIf="f.confirmaSenha.errors.required">Campo não preenchido</div>
+          </div>
+        </mat-form-field>
+        <br>
+      </div>
+      <div fxLayout="row" fxFlexAlign="start">
+        <mat-form-field>
+          <mat-label>Data de Nascimento</mat-label>
+          <input matInput formControlName="dataNascimento"
+                 [ngClass]="{ 'is-invalid': submitted && f.dataNascimento.errors }"
+                 [matDatepicker]="picker" [(ngModel)]="usuarioModel.dataNascimento">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <div *ngIf="submitted && f.dataNascimento.errors" class="invalid-feedback">
+            <div *ngIf="f.dataNascimento.errors.required">Campo não preenchido</div>
+          </div>
+        </mat-form-field>
+        <br>
+      </div>
+      <mat-toolbar>
+        <div class="button">
+          <button mat-raised-button color="primary" class="btn btn-primary mr-1" fxFlexAlign="center">Register</button>
+        </div>
+      </mat-toolbar>
+    </div>
+  </form>
+</div>

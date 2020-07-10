@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import {environment} from '../../../environments/environment';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {UsuarioLoginModel} from "../../shared/models/UsuarioLogin.model";
 import {Observable, throwError} from "rxjs";
-import {UsuarioModel} from "../../shared/models/Usuario.model";
-import {UsuarioDto} from "../../shared/models/dto/Usuario.dto";
+import {environment} from "../../../../../environments/environment";
+import {UsuarioDto} from "../../../models/dto/Usuario.dto";
+import {UsuarioModel} from "../../../models/Usuario.model";
+
 
 @Injectable({
   providedIn: 'root'
