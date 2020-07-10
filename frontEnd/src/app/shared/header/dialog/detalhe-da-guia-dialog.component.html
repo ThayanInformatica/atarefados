@@ -28,8 +28,12 @@
       <div fxLayout="row" fxFlexAlign="end">
         <mat-form-field appearance="outline" class="space-input">
           <mat-label>Senha</mat-label>
-          <input matInput type="text" formControlName="senha" class="form-control"
+          <input matInput formControlName="senha" class="form-control password-input" type="password"
+                 show-hide-input
                  [ngClass]="{ 'is-invalid': submitted && f.senha.errors }" [(ngModel)]="usuarioLoginModel.senha">
+          <div class="position-icon">
+            <mat-icon (click)="toggleShow()">visibility</mat-icon>
+          </div>
           <div *ngIf="submitted && f.senha.errors" class="invalid-feedback">
             <div *ngIf="f.senha.errors.required">Campo não preenchido</div>
           </div>
@@ -37,8 +41,12 @@
         <br>
         <mat-form-field appearance="outline" class="input-space">
           <mat-label>Confirmar senha</mat-label>
-          <input matInput type="text" formControlName="confirmaSenha" class="form-control"
+          <input matInput formControlName="confirmaSenha" class="form-control password-input" type="password"
+                 show-hide-input-confirm
                  [ngClass]="{ 'is-invalid': submitted && f.confirmaSenha.errors }">
+          <div class="position-icon">
+            <mat-icon (click)="toggleShowConfirm()">visibility</mat-icon>
+          </div>
           <div *ngIf="submitted && f.confirmaSenha.errors" class="invalid-feedback">
             <div *ngIf="f.confirmaSenha.errors.required">Campo não preenchido</div>
           </div>

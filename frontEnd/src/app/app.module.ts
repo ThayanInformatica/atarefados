@@ -18,6 +18,8 @@ import {HomeModule} from "./home/home.module";
 import {SharedModule} from "./shared/shared.module";
 import {CadastroDialogComponent} from "./shared/header/dialog/detalhe-da-guia-dialog.component";
 import {MatDialogModule} from "@angular/material/dialog";
+import {ShowHideInput} from "./shared/utils/Show-hide-input";
+import {ShowHideInputConfirm} from "./shared/utils/Show-hide-input-confirm";
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     ErrorDialogComponent,
     LoaderComponent,
     CadastroDialogComponent,
+    ShowHideInput,
+    ShowHideInputConfirm,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Directive, OnInit, ViewChild} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UsuarioLoginModel} from "../../models/UsuarioLogin.model";
@@ -8,7 +8,8 @@ import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CadastroUsuarioService} from "./serviceDialog/cadastro-usuario.service";
 import {MustMatch} from "./must-match";
-
+import {ShowHideInput} from "../../utils/Show-hide-input";
+import {ShowHideInputConfirm} from "../../utils/Show-hide-input-confirm";
 
 @Component({
   templateUrl: 'detalhe-da-guia-dialog.component.html',
@@ -21,6 +22,12 @@ export class CadastroDialogComponent implements OnInit {
   public usuarioLoginModel: UsuarioLoginModel = new UsuarioLoginModel();
   public usuarioDto: UsuarioDto = new UsuarioDto();
   public usuarioModel: UsuarioModel = new UsuarioModel();
+  password = "secret";
+  show = false;
+  showconfirm = false;
+
+  @ViewChild(ShowHideInput, {static: false}) input: ShowHideInput;
+  @ViewChild(ShowHideInputConfirm, {static: false}) inputConfirm: ShowHideInputConfirm;
 
   constructor(private dialogRef: MatDialogRef<CadastroDialogComponent>,
               private formBuilder: FormBuilder,
@@ -71,4 +78,23 @@ export class CadastroDialogComponent implements OnInit {
   public closeDialog(): void {
     this.dialogRef.close();
   }
+
+  toggleShow() {
+    this.show = !this.show;
+    if (this.show) {
+      this.input.changeType("text");
+    } else {
+      this.input.changeType("password");
+    }
+  }
+
+  toggleShowConfirm() {
+    this.showconfirm = !this.showconfirm;
+    if (this.showconfirm) {
+      this.inputConfirm.changeType("text");
+    } else {
+      this.inputConfirm.changeType("password");
+    }
+  }
+
 }

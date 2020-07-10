@@ -11,6 +11,16 @@
 .button{
   margin: auto;
 }
+.position-icon{
+  float: right;
+  margin-top: -7px;
+  cursor: pointer!important;
+  z-index: 999 !important;
+  position: relative;
+}
+.password-input{
+  max-width: 84%;
+}
 
 .space-input{
   margin-right: 10px;
