@@ -1,9 +1,5 @@
-<app-header></app-header>
 <mat-toolbar cfxFlex="100">
   <h2>Nova tarefa</h2>
-  <div class="ConteudoButton" fxFlex="98" fxLayoutAlign="end start">
-    <a mat-flat-button routerLink="/dashboard">Dashboard</a>
-  </div>
 </mat-toolbar>
 <form (ngSubmit)="onSubmit()" fxLayout="column" style="align-items: center;" [formGroup]="tarefaForm">
   <div class="input-row" fxLayout="row" fxLayoutGap="20px" style="width: 40%">
@@ -57,7 +53,7 @@
   </div>
 
   <div class="input-row" fxLayout="row" fxLayoutGap="20px" style="width: 40%">
-    <button mat-flat-button style="width: 50%">Voltar</button>
+    <button mat-flat-button style="width: 50%" (click)="voltarDashBoard()">Voltar</button>
     <button mat-flat-button color="primary" style="width: 50%" type="submit">Criar tarefa</button>
   </div>
 </form>

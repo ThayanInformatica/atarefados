@@ -4,9 +4,9 @@ import { TarefaModel } from './../../shared/models/Tarefa.model';
 import { UsuarioModel } from './../../shared/models/Usuario.model';
 import { UsuarioService } from './../../service/usuario.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { ErrorStateMatcher } from '@angular/material';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { EstadoTarefaModel } from 'src/app/shared/models/EstadoTarefa.model';
+import {AppStepEnum} from "../../shared/models/enum/app-step.enum.model";
 
 @Component({
   selector: 'app-nova-tarefa',
@@ -15,8 +15,10 @@ import { EstadoTarefaModel } from 'src/app/shared/models/EstadoTarefa.model';
 })
 export class NovaTarefaComponent implements OnInit {
 
-  private tarefaForm: FormGroup;
-  private submitted: boolean;
+  @Output() changeApp = new EventEmitter();
+
+  appStep = AppStepEnum;
+  tarefaForm: FormGroup;
   todosUsuarios: UsuarioModel[];
   novaTarefa = new TarefaModel();
   novoEstadoTarefa = new EstadoTarefaModel();
@@ -99,5 +101,9 @@ export class NovaTarefaComponent implements OnInit {
     if(this.tarefaForm.get(campo).value < currentDate){
       return true;
     }
+  }
+
+  voltarDashBoard() {
+    this.changeApp.emit(this.appStep.INDEX_TELA);
   }
 }
